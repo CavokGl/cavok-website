@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAVOK</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:     #0a0d12;
+  --ink2:    #111620;
+  --ink3:    #181f2e;
+  --gold:    #b8955a;
+  --gold2:   #d4b07a;
+  --cream:   #e8e0d0;
+  --cream2:  rgba(232,224,208,0.55);
+  --cream3:  rgba(232,224,208,0.22);
+  --border:  rgba(184,149,90,0.1);
+  --border2: rgba(184,149,90,0.22);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--ink);
+  color: var(--cream);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ─────────────────────────────────── */
+#cursor {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  transform: translate(-50%, -50%);
+}
+#cursor-ring {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(184,149,90,0.4);
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transition: transform 0.35s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  transform: translate(-50%, -50%);
+}
+a:hover ~ #cursor, button:hover ~ #cursor { transform: translate(-50%,-50%) scale(2); }
+
+/* ── GRAIN OVERLAY ─────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 1000;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+}
+
+/* ── NAV ───────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 32px 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: padding 0.4s ease, background 0.4s ease;
+}
+nav.compact {
+  padding: 20px 52px;
+  background: rgba(10,13,18,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-mark {
+  display: flex; align-items: center; gap: 14px;
+  text-decoration: none;
+}
+.nav-sigil {
+  width: 30px; height: 30px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; color: var(--gold);
+  transition: all 0.25s ease;
+}
+.nav-mark:hover .nav-sigil { background: var(--gold); color: var(--ink); }
+.nav-wordmark {
+  font-family: 'Jost', sans-serif;
+  font-weight: 200;
+  font-size: 15px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+.nav-right {
+  display: flex; align-items: center; gap: 40px;
+}
+.nav-link {
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--cream3); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--cream2); }
+.nav-cta {
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold); text-decoration: none;
+  border: 1px solid var(--border2);
+  padding: 10px 24px;
+  transition: all 0.25s ease;
+  background: transparent;
+  cursor: none;
+}
+.nav-cta:hover {
+  background: var(--gold);
+  color: var(--ink);
+  border-color: var(--gold);
+}
+
+/* ── HERO ──────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: flex-start;
+  padding: 0 52px 0 52px;
+  position: relative; overflow: hidden;
+}
+
+/* Subtle geometric background */
+.hero-geo {
+  position: absolute; inset: 0; pointer-events: none;
+  overflow: hidden;
+}
+.hero-geo::before {
+  content: '';
+  position: absolute;
+  right: -180px; top: 50%;
+  transform: translateY(-50%);
+  width: 680px; height: 680px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  opacity: 0.6;
+}
+.hero-geo::after {
+  content: '';
+  position: absolute;
+  right: -80px; top: 50%;
+  transform: translateY(-50%);
+  width: 440px; height: 440px;
+  border-radius: 50%;
+  border: 1px solid var(--border2);
+  opacity: 0.4;
+}
+.hero-dot {
+  position: absolute;
+  right: 200px; top: 50%;
+  transform: translateY(-50%);
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.7;
+}
+
+.hero-content { max-width: 680px; position: relative; }
+
+.hero-label {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 52px;
+  opacity: 0; animation: fadeUp 0.9s 0.2s forwards;
+}
+.hero-label-line {
+  width: 32px; height: 1px; background: var(--gold); opacity: 0.5;
+}
+.hero-label-text {
+  font-size: 9px; font-weight: 300;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--cream3);
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(46px, 6.5vw, 82px);
+  line-height: 1.08;
+  letter-spacing: -0.5px;
+  color: var(--cream);
+  margin-bottom: 32px;
+  opacity: 0; animation: fadeUp 0.9s 0.4s forwards;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+  opacity: 0.9;
+}
+
+.hero-body {
+  font-size: 14px; font-weight: 300;
+  color: var(--cream3);
+  line-height: 1.85;
+  max-width: 440px;
+  margin-bottom: 52px;
+  opacity: 0; animation: fadeUp 0.9s 0.6s forwards;
+}
+
+.hero-actions {
+  display: flex; gap: 16px;
+  opacity: 0; animation: fadeUp 0.9s 0.8s forwards;
+}
+.btn-ghost {
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--cream2); text-decoration: none;
+  padding: 14px 32px;
+  border: 1px solid rgba(232,224,208,0.15);
+  transition: all 0.25s ease;
+  cursor: none;
+}
+.btn-ghost:hover {
+  border-color: rgba(232,224,208,0.35);
+  color: var(--cream);
+}
+.btn-gold {
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+  padding: 14px 32px;
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  transition: all 0.25s ease;
+  cursor: none;
+}
+.btn-gold:hover { background: var(--gold2); border-color: var(--gold2); }
+
+/* Scroll indicator */
+.hero-scroll {
+  position: absolute; bottom: 40px; left: 52px;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0; animation: fadeUp 0.9s 1.1s forwards;
+}
+.scroll-bar {
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  animation: scrollpulse 2.5s ease-in-out infinite;
+}
+@keyframes scrollpulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+.scroll-label {
+  font-size: 8px; font-weight: 300;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--cream3);
+  writing-mode: vertical-rl;
+}
+
+/* Stats row */
+.hero-stats {
+  position: absolute; bottom: 40px; right: 52px;
+  display: flex; gap: 48px;
+  opacity: 0; animation: fadeUp 0.9s 1.0s forwards;
+}
+.hstat { text-align: right; }
+.hstat-v {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 300;
+  color: var(--cream);
+}
+.hstat-l {
+  font-size: 9px; font-weight: 300;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--cream3); margin-top: 4px;
+}
+
+/* ── SECTION: WHAT ─────────────────────────────────── */
+.what {
+  padding: 120px 52px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+  border-top: 1px solid var(--border);
+}
+.what-left { }
+.what-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; font-weight: 300;
+  color: var(--gold); letter-spacing: 3px;
+  margin-bottom: 24px;
+}
+.what-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 300; line-height: 1.15;
+  color: var(--cream);
+  margin-bottom: 24px;
+}
+.what-body {
+  font-size: 13px; font-weight: 300;
+  color: var(--cream3); line-height: 1.9;
+  max-width: 360px;
+}
+.what-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 32px;
+  font-size: 10px; font-weight: 300;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold); text-decoration: none;
+  transition: gap 0.2s ease;
+}
+.what-link:hover { gap: 16px; }
+.what-link::after { content: '→'; }
+
+.what-right {
+  display: flex; flex-direction: column; gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.what-item {
+  background: var(--ink2);
+  padding: 28px 32px;
+  display: flex; gap: 20px; align-items: flex-start;
+  transition: background 0.2s;
+}
+.what-item:hover { background: var(--ink3); }
+.what-item-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; color: var(--gold);
+  opacity: 0.5; min-width: 20px; margin-top: 2px;
+}
+.what-item-title {
+  font-size: 12px; font-weight: 400;
+  letter-spacing: 0.3px; margin-bottom: 6px;
+}
+.what-item-text {
+  font-size: 12px; font-weight: 300;
+  color: var(--cream3); line-height: 1.7;
+}
+
+/* ── SECTION: HOW ──────────────────────────────────── */
+.how {
+  padding: 120px 52px;
+  background: var(--ink2);
+  border-top: 1px solid var(--border);
+}
+.how-head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 72px;
+}
+.how-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 300; line-height: 1.15;
+  color: var(--cream); max-width: 400px;
+}
+.how-sub {
+  font-size: 12px; font-weight: 300;
+  color: var(--cream3); line-height: 1.8;
+  max-width: 320px; text-align: right;
+}
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+}
+.how-step {
+  background: var(--ink2);
+  padding: 40px 28px 36px;
+  position: relative;
+  transition: background 0.2s;
+}
+.how-step:hover { background: var(--ink3); }
+.how-step-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 64px; font-weight: 300;
+  color: var(--gold); opacity: 0.08;
+  position: absolute; top: 16px; right: 20px;
+  line-height: 1;
+}
+.how-step-icon {
+  font-size: 18px; margin-bottom: 20px; display: block;
+}
+.how-step-title {
+  font-size: 13px; font-weight: 400;
+  margin-bottom: 10px; letter-spacing: 0.2px;
+}
+.how-step-text {
+  font-size: 11px; font-weight: 300;
+  color: var(--cream3); line-height: 1.75;
+}
+
+/* ── SECTION: FOOTER ────────────────────────────────── */
+footer {
+  padding: 64px 52px 48px;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+.ft-brand { }
+.ft-mark {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+}
+.ft-sigil {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px; color: var(--gold);
+}
+.ft-name {
+  font-family: 'Jost', sans-serif; font-weight: 200;
+  font-size: 13px; letter-spacing: 5px; text-transform: uppercase;
+}
+.ft-tagline {
+  font-size: 11px; font-weight: 300;
+  color: var(--cream3); line-height: 1.8;
+  max-width: 240px; margin-bottom: 24px;
+}
+.ft-network {
+  font-size: 9px; font-weight: 300;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gold); opacity: 0.6;
+}
+.ft-col h4 {
+  font-size: 9px; font-weight: 300;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--cream3); margin-bottom: 20px;
+}
+.ft-col a {
+  display: block; font-size: 12px; font-weight: 300;
+  color: var(--cream3); text-decoration: none;
+  margin-bottom: 12px; transition: color 0.2s;
+}
+.ft-col a:hover { color: var(--cream); }
+.ft-bottom {
+  grid-column: 1 / -1;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.ft-legal {
+  font-size: 9px; font-weight: 300;
+  color: rgba(232,224,208,0.18); line-height: 1.7;
+  max-width: 560px;
+}
+.ft-copy {
+  font-size: 9px; font-weight: 300;
+  letter-spacing: 1px; color: rgba(232,224,208,0.25);
+  white-space: nowrap;
+}
+
+/* ── ANIMATIONS ─────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  body { cursor: auto; }
+  #cursor, #cursor-ring { display: none; }
+  nav { padding: 24px 24px; }
+  nav.compact { padding: 16px 24px; }
+  .nav-right { gap: 20px; }
+  .nav-link { display: none; }
+  .hero { padding: 0 24px; }
+  .hero-stats { display: none; }
+  .hero-scroll { left: 24px; }
+  .what { grid-template-columns: 1fr; gap: 48px; padding: 80px 24px; }
+  .what-body { max-width: 100%; }
+  .how { padding: 80px 24px; }
+  .how-head { flex-direction: column; gap: 20px; align-items: flex-start; }
+  .how-sub { text-align: left; }
+  .how-grid { grid-template-columns: 1fr 1fr; }
+  footer { grid-template-columns: 1fr 1fr; padding: 48px 24px 36px; gap: 32px; }
+  .ft-brand { grid-column: 1 / -1; }
+  .ft-bottom { flex-direction: column; gap: 16px; align-items: flex-start; }
+}
+@media (max-width: 560px) {
+  .how-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: 40px; }
+  .hero-actions { flex-direction: column; }
+  footer { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-mark" href="index.html">
+    <div class="nav-sigil">◎</div>
+    <div class="nav-wordmark">Cavok</div>
+  </a>
+  <div class="nav-right">
+    <a class="nav-link" href="projects.html">Projects</a>
+    <a class="nav-link" href="technology.html">Technology</a>
+    <a class="nav-link" href="about.html">About</a>
+    <a class="nav-cta" href="contact.html">Request Access</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-geo"></div>
+  <div class="hero-dot"></div>
+
+  <div class="hero-content">
+    <div class="hero-label">
+      <div class="hero-label-line"></div>
+      <div class="hero-label-text">Flare Network · Real Estate · On-Chain</div>
+    </div>
+    <h1 class="hero-title">
+      Premium property.<br>
+      <em>Reimagined</em><br>
+      for every investor.
+    </h1>
+    <p class="hero-body">
+      CAVOK tokenises exceptional European real estate as profit-participating loans — delivering fractional access, three simultaneous yield streams, and full on-chain transparency from the moment you commit.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-gold" href="projects.html">Explore Projects</a>
+      <a class="btn-ghost" href="about.html">Our Approach</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-bar"></div>
+    <span class="scroll-label">Scroll</span>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-v">€6.9M</div>
+      <div class="hstat-l">Pipeline TVL</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-v">3</div>
+      <div class="hstat-l">Yield Streams</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-v">€1,000</div>
+      <div class="hstat-l">Min. Position</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="what">
+  <div class="what-left reveal">
+    <div class="what-num">01 — What We Do</div>
+    <h2 class="what-title">Capital that works<br>before the first<br>brick is laid.</h2>
+    <p class="what-body">
+      Most real estate investments lock your capital away while construction drags on. CAVOK deploys 79% of committed capital into yield instruments from day one — so investors earn while the project builds.
+    </p>
+    <a class="what-link" href="technology.html">How it works</a>
+  </div>
+  <div class="what-right reveal">
+    <div class="what-item">
+      <div class="what-item-num">I</div>
+      <div>
+        <div class="what-item-title">Vault yield — active immediately</div>
+        <div class="what-item-text">Idle capital earns 12.4% APY in DeFi vaults from the day funds are committed. Distributed monthly to token holders throughout the project lifecycle.</div>
+      </div>
+    </div>
+    <div class="what-item">
+      <div class="what-item-num">II</div>
+      <div>
+        <div class="what-item-title">Rental income — conditional interest</div>
+        <div class="what-item-text">Upon completion, rental income flows on-chain monthly as conditional interest on your loan position. Legally structured outside MiFID II securities scope.</div>
+      </div>
+    </div>
+    <div class="what-item">
+      <div class="what-item-num">III</div>
+      <div>
+        <div class="what-item-title">Exit gain — pro-rata appreciation</div>
+        <div class="what-item-text">Your share of property value growth at sale. Partial exits supported — redeem any number of tokens. Monte Mayor target: 5,500,000 USDT0 at Month 48.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-head reveal">
+    <h2 class="how-title">From wallet<br>to yield in<br>four steps.</h2>
+    <p class="how-sub">
+      CAVOK handles the complexity of real estate investment on-chain. Connect, choose, commit — then watch your capital work.
+    </p>
+  </div>
+  <div class="how-grid reveal">
+    <div class="how-step">
+      <div class="how-step-n">1</div>
+      <span class="how-step-icon">◎</span>
+      <div class="how-step-title">Connect your wallet</div>
+      <div class="how-step-text">Connect via Bifrost, MetaMask, or WalletConnect. Compliance is verified on-chain — no separate KYC for existing Flare users.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-n">2</div>
+      <span class="how-step-icon">⬡</span>
+      <div class="how-step-title">Choose a project</div>
+      <div class="how-step-text">Browse live SPVs with real-time data from Flare Network. Each project shows target return, build progress, and current yield.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-n">3</div>
+      <span class="how-step-icon">◈</span>
+      <div class="how-step-title">Commit USDT0</div>
+      <div class="how-step-text">Approve and commit your position to the project escrow. Tokens are minted pro-rata when the hard cap is reached and activated.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-n">4</div>
+      <span class="how-step-icon">⟳</span>
+      <div class="how-step-title">Earn on-chain</div>
+      <div class="how-step-text">Vault yield begins immediately. Claim to wallet, compound via the secondary market, or enable auto-compound with a configurable threshold.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-brand">
+    <div class="ft-mark">
+      <div class="ft-sigil">◎</div>
+      <div class="ft-name">Cavok</div>
+    </div>
+    <p class="ft-tagline">Programmable real estate capital on Flare Network. Three yield streams. Full transparency.</p>
+    <div class="ft-network">Flare Network · Coston2 Testnet · Mainnet Q3 2026</div>
+  </div>
+
+  <div class="ft-col">
+    <h4>Platform</h4>
+    <a href="projects.html">Projects</a>
+    <a href="technology.html">Technology</a>
+    <a href="about.html">Roadmap</a>
+  </div>
+
+  <div class="ft-col">
+    <h4>Company</h4>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html">Investors</a>
+  </div>
+
+  <div class="ft-col">
+    <h4>Network</h4>
+    <a href="https://flare.network" target="_blank">Flare Network</a>
+    <a href="https://coston2-explorer.flare.network" target="_blank">Block Explorer</a>
+    <a href="https://bifrostwallet.com" target="_blank">Bifrost Wallet</a>
+  </div>
+
+  <div class="ft-bottom">
+    <p class="ft-legal">CAVOK tokens are profit-participating loan instruments and are not classified as securities under MiFID II in most EU jurisdictions. This website is for informational purposes only and does not constitute an offer or solicitation to purchase securities. Consult legal counsel before investing.</p>
+    <span class="ft-copy">© 2026 CAVOK</span>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animCursor() {
+  cur.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cur.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%) scale(2.5)`;
+    ring.style.opacity = '0.3';
+  });
+  el.addEventListener('mouseleave', () => {
+    cur.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%) scale(1)`;
+    ring.style.opacity = '1';
+  });
+});
+
+// Nav compact
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('compact', window.scrollY > 60);
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
