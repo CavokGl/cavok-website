@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAVOK — About</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0a0d12;--ink2:#111620;--ink3:#181f2e;--gold:#b8955a;--gold2:#d4b07a;--cream:#e8e0d0;--cream2:rgba(232,224,208,0.55);--cream3:rgba(232,224,208,0.22);--border:rgba(184,149,90,0.1);--border2:rgba(184,149,90,0.22);--green:#3a9e6a;--amber:#c49030}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--ink);color:var(--cream);overflow-x:hidden;cursor:none}
+body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;opacity:.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");background-size:128px}
+#cursor{width:8px;height:8px;border-radius:50%;background:var(--gold);position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s}
+#cursor-ring{width:32px;height:32px;border-radius:50%;border:1px solid rgba(184,149,90,.4);position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .35s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 52px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,13,18,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-mark{display:flex;align-items:center;gap:14px;text-decoration:none}
+.nav-sigil{width:30px;height:30px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:11px;color:var(--gold);transition:all .25s}
+.nav-mark:hover .nav-sigil{background:var(--gold);color:var(--ink)}
+.nav-wordmark{font-family:'Jost',sans-serif;font-weight:200;font-size:15px;letter-spacing:6px;text-transform:uppercase;color:var(--cream)}
+.nav-right{display:flex;align-items:center;gap:40px}
+.nav-link{font-size:10px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:var(--cream3);text-decoration:none;transition:color .2s}
+.nav-link:hover,.nav-link.active{color:var(--cream2)}
+.nav-cta{font-size:10px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid var(--border2);padding:10px 24px;transition:all .25s;cursor:none}
+.nav-cta:hover{background:var(--gold);color:var(--ink)}
+.page-header{padding:140px 52px 72px;border-bottom:1px solid var(--border)}
+.page-header-inner{max-width:600px}
+.pg-label{font-size:9px;font-weight:300;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.pg-label::before{content:'';width:28px;height:1px;background:var(--gold);opacity:.5}
+.pg-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,60px);font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:20px}
+.pg-sub{font-size:13px;font-weight:300;color:var(--cream3);line-height:1.85;max-width:480px}
+
+/* ABOUT CONTENT */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;padding:80px 52px;align-items:start}
+.about-text p{font-size:13px;font-weight:300;color:var(--cream2);line-height:1.9;margin-bottom:18px}
+.about-pull{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--cream);line-height:1.5;padding:28px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:28px 0;font-style:italic}
+.about-link{display:inline-flex;align-items:center;gap:10px;margin-top:8px;font-size:10px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:gap .2s}
+.about-link:hover{gap:16px}
+.about-link::after{content:'→'}
+.about-stats{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border)}
+.astat{background:var(--ink2);padding:28px 28px;display:flex;align-items:center;gap:20px;transition:background .2s}
+.astat:hover{background:var(--ink3)}
+.astat-v{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--gold);min-width:96px;flex-shrink:0}
+.astat-l{font-size:12px;font-weight:300;color:var(--cream2);line-height:1.6}
+
+/* VALUES */
+.values-section{padding:0 52px 80px;border-top:1px solid var(--border)}
+.values-head{padding:60px 0 48px}
+.sec-num{font-size:9px;font-weight:300;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:14px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:300;color:var(--cream)}
+.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.val-card{background:var(--ink2);padding:28px 24px;transition:background .2s}
+.val-card:hover{background:var(--ink3)}
+.val-icon{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);opacity:.5;margin-bottom:14px}
+.val-title{font-size:12px;font-weight:400;margin-bottom:8px;letter-spacing:.3px}
+.val-text{font-size:11px;font-weight:300;color:var(--cream3);line-height:1.7}
+
+/* ROADMAP */
+.roadmap-section{padding:0 52px 100px}
+.rm-items{margin-top:40px}
+.rm-item{display:flex;gap:28px;padding:28px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.rm-item:last-child{border-bottom:none}
+.rm-left{min-width:100px;flex-shrink:0}
+.rm-phase{font-size:9px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.rm-timing{font-size:11px;font-weight:300;color:var(--cream3)}
+.rm-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.done{background:var(--green)}.next{background:var(--gold)}.fut{background:var(--border2);border:1px solid var(--border)}
+.rm-title{font-size:14px;font-weight:400;margin-bottom:6px}
+.rm-text{font-size:12px;font-weight:300;color:var(--cream3);line-height:1.7}
+
+footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px}
+.ft-mark{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.ft-sigil{width:26px;height:26px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:10px;color:var(--gold)}
+.ft-name{font-family:'Jost',sans-serif;font-weight:200;font-size:13px;letter-spacing:5px;text-transform:uppercase}
+.ft-tagline{font-size:11px;font-weight:300;color:var(--cream3);line-height:1.8;max-width:240px;margin-bottom:20px}
+.ft-network{font-size:9px;font-weight:300;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.6}
+.ft-col h4{font-size:9px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:var(--cream3);margin-bottom:18px}
+.ft-col a{display:block;font-size:11px;font-weight:300;color:var(--cream3);text-decoration:none;margin-bottom:10px;transition:color .2s}
+.ft-col a:hover{color:var(--cream)}
+.ft-bottom{grid-column:1/-1;padding-top:28px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.ft-legal{font-size:9px;font-weight:300;color:rgba(232,224,208,.18);line-height:1.7;max-width:560px}
+.ft-copy{font-size:9px;font-weight:300;letter-spacing:1px;color:rgba(232,224,208,.25);white-space:nowrap}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:900px){body{cursor:auto}#cursor,#cursor-ring{display:none}nav{padding:16px 24px}.nav-link{display:none}.page-header{padding:100px 24px 52px}.about-wrap{grid-template-columns:1fr;gap:48px;padding:52px 24px}.values-section,.roadmap-section{padding-left:24px;padding-right:24px}.values-grid{grid-template-columns:1fr 1fr}footer{grid-template-columns:1fr 1fr;padding:48px 24px 36px}.ft-bottom{flex-direction:column;gap:12px;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<nav>
+  <a class="nav-mark" href="index.html"><div class="nav-sigil">◎</div><div class="nav-wordmark">Cavok</div></a>
+  <div class="nav-right">
+    <a class="nav-link" href="projects.html">Projects</a>
+    <a class="nav-link" href="technology.html">Technology</a>
+    <a class="nav-link active" href="about.html">About</a>
+    <a class="nav-cta" href="contact.html">Request Access</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner reveal">
+    <div class="pg-label">About</div>
+    <h1 class="pg-title">Built to make premium<br>real estate accessible.</h1>
+    <p class="pg-sub">CAVOK was founded on the belief that the best real estate investments shouldn't be reserved for the ultra-wealthy. We're using Flare Network to change that.</p>
+  </div>
+</div>
+
+<div class="about-wrap">
+  <div class="about-text reveal">
+    <p>The European real estate market is one of the most compelling long-term investments available — but it has historically been locked behind enormous capital minimums, opaque structures, and zero liquidity for investors who commit.</p>
+    <p>CAVOK changes this by tokenising premium properties as profit-participating loans on Flare Network. Investors receive tokens representing their loan position, earn three simultaneous yield streams, and can exit via our secondary market without waiting for the full project lifecycle.</p>
+    <div class="about-pull">"Idle capital earns yield from day one — before the first brick is laid."</div>
+    <p>Our first projects are in Marbella — one of Europe's most resilient luxury real estate markets. Monte Mayor Golf &amp; Resort has seen consistent appreciation and strong rental demand, providing a robust foundation for our pilot launches.</p>
+    <p>The infrastructure is already built. 10 contracts verified on Flare Network. A working dApp. A tested investor flow. We are onboarding the first cohort of investors now.</p>
+    <a class="about-link" href="technology.html">Explore the technology</a>
+  </div>
+  <div class="about-stats reveal">
+    <div class="astat"><div class="astat-v">10</div><div class="astat-l">Smart contracts deployed and verified on Flare Testnet Coston2</div></div>
+    <div class="astat"><div class="astat-v">€6.9M</div><div class="astat-l">Total pipeline TVL across two pilot projects ready for mainnet</div></div>
+    <div class="astat"><div class="astat-v">3</div><div class="astat-l">Simultaneous yield streams — vault, rental, exit gain</div></div>
+    <div class="astat"><div class="astat-v">€1K</div><div class="astat-l">Minimum investment — fractional access to premium property</div></div>
+    <div class="astat"><div class="astat-v">Q3 '26</div><div class="astat-l">Mainnet launch — post-audit, post-Gnosis Safe setup</div></div>
+  </div>
+</div>
+
+<div class="values-section">
+  <div class="values-head reveal">
+    <div class="sec-num">Our principles</div>
+    <h2 class="sec-title">What guides us</h2>
+  </div>
+  <div class="values-grid reveal">
+    <div class="val-card"><div class="val-icon">I</div><div class="val-title">Transparency</div><div class="val-text">Every transaction, yield distribution, and capital movement is on-chain and publicly verifiable at any time.</div></div>
+    <div class="val-card"><div class="val-icon">II</div><div class="val-title">Compliance</div><div class="val-text">MiFID II-safe by design. Profit-participating loan structure keeps CAVOK tokens outside securities regulation.</div></div>
+    <div class="val-card"><div class="val-icon">III</div><div class="val-title">Efficiency</div><div class="val-text">Idle capital earns yield from day one. No money waits idle while construction drags on.</div></div>
+    <div class="val-card"><div class="val-icon">IV</div><div class="val-title">Accessibility</div><div class="val-text">Premium real estate exposure from €1,000. No minimum wealth requirement. Global access via Flare Network.</div></div>
+  </div>
+</div>
+
+<div class="roadmap-section">
+  <div class="reveal">
+    <div class="sec-num">Roadmap</div>
+    <h2 class="sec-title">From testnet<br>to €100M TVL</h2>
+  </div>
+  <div class="rm-items reveal">
+    <div class="rm-item">
+      <div class="rm-left"><div class="rm-phase">P0</div><div class="rm-timing">April 2026</div></div>
+      <div class="rm-dot done"></div>
+      <div><div class="rm-title">Complete testnet infrastructure ✓</div><div class="rm-text">10 contracts deployed · full lifecycle tested · dApp live · automated harvest · factory · secondary market · option tokens · all flows verified end-to-end with Bifrost Wallet</div></div>
+    </div>
+    <div class="rm-item">
+      <div class="rm-left"><div class="rm-phase">P1</div><div class="rm-timing">Q3 2026</div></div>
+      <div class="rm-dot next"></div>
+      <div><div class="rm-title">Mainnet launch · Monte Mayor pilot</div><div class="rm-text">Smart contract audit · Gnosis Safe 2-of-3 · FLR via FTSO · Gelato automation · Monte Mayor A+B live · first investors onboarded · SPV jurisdiction confirmed</div></div>
+    </div>
+    <div class="rm-item">
+      <div class="rm-left"><div class="rm-phase">P2</div><div class="rm-timing">Q4 2026</div></div>
+      <div class="rm-dot fut"></div>
+      <div><div class="rm-title">FXRP + Rental mode + Governance</div><div class="rm-text">FAssets FXRP payment · rental income live · token-holder governance · FTSO FDC property attestation · MMV-B launch</div></div>
+    </div>
+    <div class="rm-item">
+      <div class="rm-left"><div class="rm-phase">P3</div><div class="rm-timing">2027</div></div>
+      <div class="rm-dot fut"></div>
+      <div><div class="rm-title">Commercial assets · FBTC · €50M TVL</div><div class="rm-text">Hotel and commercial tokenisation · FBTC via FAssets · multi-property portfolio tokens · expansion to Portugal and Mediterranean</div></div>
+    </div>
+    <div class="rm-item">
+      <div class="rm-left"><div class="rm-phase">P4</div><div class="rm-timing">2027–28</div></div>
+      <div class="rm-dot fut"></div>
+      <div><div class="rm-title">€100M TVL · Institutional</div><div class="rm-text">KYC/AML via Flare identity · institutional custody · lending against tokenised positions · CAVOK token on major DEXs</div></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div><div class="ft-mark"><div class="ft-sigil">◎</div><div class="ft-name">Cavok</div></div><p class="ft-tagline">Programmable real estate capital on Flare Network.</p><div class="ft-network">Flare Network · Coston2 · Mainnet Q3 2026</div></div>
+  <div class="ft-col"><h4>Platform</h4><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="technology.html">Technology</a></div>
+  <div class="ft-col"><h4>Company</h4><a href="contact.html">Contact</a><a href="contact.html">Investors</a></div>
+  <div class="ft-col"><h4>Network</h4><a href="https://flare.network" target="_blank">Flare Network</a><a href="https://coston2-explorer.flare.network" target="_blank">Explorer</a></div>
+  <div class="ft-bottom"><p class="ft-legal">CAVOK tokens are profit-participating loan instruments and are not classified as securities under MiFID II in most EU jurisdictions. For informational purposes only.</p><span class="ft-copy">© 2026 CAVOK</span></div>
+</footer>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function ac(){cur.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(ac);}ac();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%) scale(2.5)`;ring.style.opacity='.3';});el.addEventListener('mouseleave',()=>{cur.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%) scale(1)`;ring.style.opacity='1';});});
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target);}});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

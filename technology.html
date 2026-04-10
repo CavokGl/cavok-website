@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAVOK — Technology</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0a0d12;--ink2:#111620;--ink3:#181f2e;--gold:#b8955a;--gold2:#d4b07a;--cream:#e8e0d0;--cream2:rgba(232,224,208,0.55);--cream3:rgba(232,224,208,0.22);--border:rgba(184,149,90,0.1);--border2:rgba(184,149,90,0.22);--green:#3a9e6a;--blue:#4a9ed4;--amber:#c49030;--purple:#9a72c0;--red:#c04a4a}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--ink);color:var(--cream);overflow-x:hidden;cursor:none}
+body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;opacity:.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");background-size:128px}
+#cursor{width:8px;height:8px;border-radius:50%;background:var(--gold);position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s}
+#cursor-ring{width:32px;height:32px;border-radius:50%;border:1px solid rgba(184,149,90,.4);position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .35s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 52px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,13,18,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-mark{display:flex;align-items:center;gap:14px;text-decoration:none}
+.nav-sigil{width:30px;height:30px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:11px;color:var(--gold);transition:all .25s}
+.nav-mark:hover .nav-sigil{background:var(--gold);color:var(--ink)}
+.nav-wordmark{font-family:'Jost',sans-serif;font-weight:200;font-size:15px;letter-spacing:6px;text-transform:uppercase;color:var(--cream)}
+.nav-right{display:flex;align-items:center;gap:40px}
+.nav-link{font-size:10px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:var(--cream3);text-decoration:none;transition:color .2s}
+.nav-link:hover,.nav-link.active{color:var(--cream2)}
+.nav-cta{font-size:10px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid var(--border2);padding:10px 24px;transition:all .25s;cursor:none}
+.nav-cta:hover{background:var(--gold);color:var(--ink)}
+.page-header{padding:140px 52px 72px;border-bottom:1px solid var(--border)}
+.page-header-inner{max-width:600px}
+.pg-label{font-size:9px;font-weight:300;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.pg-label::before{content:'';width:28px;height:1px;background:var(--gold);opacity:.5}
+.pg-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,60px);font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:20px}
+.pg-sub{font-size:13px;font-weight:300;color:var(--cream3);line-height:1.85;max-width:480px}
+
+.inner{padding:80px 52px}
+.sec-num{font-size:9px;font-weight:300;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:14px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:300;color:var(--cream);margin-bottom:36px}
+
+/* CONTRACTS GRID */
+.contracts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.contract-card{background:var(--ink2);padding:28px 24px;transition:background .2s;position:relative}
+.contract-card:hover{background:var(--ink3)}
+.cc-accent{width:2px;height:32px;position:absolute;left:0;top:28px}
+.cc-name{font-size:13px;font-weight:400;margin-bottom:6px;padding-left:12px}
+.cc-addr{font-family:monospace;font-size:9px;color:var(--gold);opacity:.7;margin-bottom:14px;padding-left:12px;letter-spacing:.5px}
+.cc-text{font-size:11px;font-weight:300;color:var(--cream3);line-height:1.7;padding-left:12px}
+.cc-tag{display:inline-block;font-size:8px;font-weight:300;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border:1px solid var(--border2);color:var(--gold);margin-top:12px;margin-left:12px}
+.cc-link{display:inline-block;font-size:8px;font-weight:300;letter-spacing:1px;text-transform:uppercase;color:var(--blue);text-decoration:none;margin-left:8px;margin-top:12px;opacity:.7;transition:opacity .2s}
+.cc-link:hover{opacity:1}
+
+/* FLOW DIAGRAM */
+.flows-section{padding:0 52px 80px;background:var(--ink2);border-top:1px solid var(--border)}
+.flow-block{margin-bottom:36px}
+.flow-label{font-size:9px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:var(--cream3);margin-bottom:14px}
+.flow-steps{display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.flow-box{background:var(--ink3);border:1px solid var(--border);padding:10px 16px;font-size:11px;font-weight:300;white-space:nowrap;transition:background .2s}
+.flow-box:hover{background:var(--ink)}
+.flow-box.gold{border-color:var(--border2);color:var(--gold)}
+.flow-box.green{border-color:rgba(58,158,106,.3);color:var(--green)}
+.flow-box.blue{border-color:rgba(74,158,212,.3);color:var(--blue)}
+.flow-box.amber{border-color:rgba(196,144,48,.3);color:var(--amber)}
+.flow-box.red{border-color:rgba(192,74,74,.3);color:var(--red)}
+.flow-arrow{font-size:12px;color:var(--cream3);padding:0 8px;flex-shrink:0}
+
+/* STACK */
+.stack-section{padding:0 52px 80px}
+.stack-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.stack-item{background:var(--ink2);padding:22px 24px;display:flex;gap:14px;align-items:flex-start;transition:background .2s}
+.stack-item:hover{background:var(--ink3)}
+.stack-cat{font-size:9px;font-weight:300;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.6;min-width:80px;flex-shrink:0;margin-top:2px}
+.stack-val{font-size:12px;font-weight:300;color:var(--cream2);line-height:1.6}
+
+footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px}
+.ft-mark{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.ft-sigil{width:26px;height:26px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:10px;color:var(--gold)}
+.ft-name{font-family:'Jost',sans-serif;font-weight:200;font-size:13px;letter-spacing:5px;text-transform:uppercase}
+.ft-tagline{font-size:11px;font-weight:300;color:var(--cream3);line-height:1.8;max-width:240px;margin-bottom:20px}
+.ft-network{font-size:9px;font-weight:300;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.6}
+.ft-col h4{font-size:9px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:var(--cream3);margin-bottom:18px}
+.ft-col a{display:block;font-size:11px;font-weight:300;color:var(--cream3);text-decoration:none;margin-bottom:10px;transition:color .2s}
+.ft-col a:hover{color:var(--cream)}
+.ft-bottom{grid-column:1/-1;padding-top:28px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.ft-legal{font-size:9px;font-weight:300;color:rgba(232,224,208,.18);line-height:1.7;max-width:560px}
+.ft-copy{font-size:9px;font-weight:300;letter-spacing:1px;color:rgba(232,224,208,.25);white-space:nowrap}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:900px){body{cursor:auto}#cursor,#cursor-ring{display:none}nav{padding:16px 24px}.nav-link{display:none}.page-header{padding:100px 24px 52px}.inner,.flows-section,.stack-section{padding-left:24px;padding-right:24px}.contracts-grid{grid-template-columns:1fr}.stack-grid{grid-template-columns:1fr}footer{grid-template-columns:1fr 1fr;padding:48px 24px 36px}.ft-bottom{flex-direction:column;gap:12px;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<nav>
+  <a class="nav-mark" href="index.html"><div class="nav-sigil">◎</div><div class="nav-wordmark">Cavok</div></a>
+  <div class="nav-right">
+    <a class="nav-link" href="projects.html">Projects</a>
+    <a class="nav-link active" href="technology.html">Technology</a>
+    <a class="nav-link" href="about.html">About</a>
+    <a class="nav-cta" href="contact.html">Request Access</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner reveal">
+    <div class="pg-label">Technology</div>
+    <h1 class="pg-title">Built on Flare.<br>Verified on-chain.</h1>
+    <p class="pg-sub">10 smart contracts deployed and source-verified on Flare Testnet Coston2. Production-grade architecture with a clear path to mainnet Q3 2026.</p>
+  </div>
+</div>
+
+<!-- CONTRACTS -->
+<div class="inner" style="padding-bottom:0">
+  <div class="sec-num reveal">Smart contracts</div>
+  <h2 class="sec-title reveal">Complete on-chain<br>infrastructure</h2>
+</div>
+<div style="padding:0 52px 80px">
+  <div class="contracts-grid reveal">
+    <div class="contract-card"><div class="cc-accent" style="background:var(--green)"></div><div class="cc-name">CAVOKTokenFactory</div><div class="cc-addr">0x05bf...F218</div><div class="cc-text">Deploys a complete SPV suite — token, commitment, and lifecycle — in a single transaction. Supports Development, Rental, and Commercial asset types.</div><span class="cc-tag">Factory</span><a class="cc-link" href="https://coston2-explorer.flare.network/address/0x05bfEA14b5450A8F8D9261Da047484F06020F218" target="_blank">Explorer ↗</a></div>
+    <div class="contract-card"><div class="cc-accent" style="background:var(--purple)"></div><div class="cc-name">MMVALifecycle v2</div><div class="cc-addr">0x761A...9b37</div><div class="cc-text">Complete state machine: Development → Rental → Exit → Finalized. Dynamic 79/14/7 splits with 30-day timelock. Governance via 51% token-holder vote.</div><span class="cc-tag">State machine</span></div>
+    <div class="contract-card"><div class="cc-accent" style="background:var(--blue)"></div><div class="cc-name">MMVAToken v3</div><div class="cc-addr">0x6d74...6a6c</div><div class="cc-text">ERC-20 profit-participating loan token with permissioned transfers. Whitelist-enforced compliance. Partial burn on exit claim. Per-SPV supply.</div><span class="cc-tag">ERC-20</span></div>
+    <div class="contract-card"><div class="cc-accent" style="background:var(--blue)"></div><div class="cc-name">MMVACommitment v3</div><div class="cc-addr">0x44Ff...2b79</div><div class="cc-text">Commit-and-trigger escrow. Capital held until hard cap is reached, then activated pro-rata. Full refund mechanism if cap not reached by deadline.</div><span class="cc-tag">Escrow</span></div>
+    <div class="contract-card"><div class="cc-accent" style="background:var(--gold)"></div><div class="cc-name">CAVOKTokenPool</div><div class="cc-addr">0x1f81...748c</div><div class="cc-text">Peer-to-peer secondary market. FTSO-validated reference pricing with ±10% seller offset. 1% fee to ops treasury. Whitelisted investors only.</div><span class="cc-tag">P2P market</span><a class="cc-link" href="https://coston2-explorer.flare.network/address/0x1f8101498BE0e6B067725055c564c3614a8E748c" target="_blank">Explorer ↗</a></div>
+    <div class="contract-card"><div class="cc-accent" style="background:var(--purple)"></div><div class="cc-name">CAVOKOptionToken</div><div class="cc-addr">0x8762...e267</div><div class="cc-text">Soulbound reservation system. Free on-chain commitments convert automatically when project threshold is reached. 30-day conversion window. MiFID II safe.</div><span class="cc-tag">SBT</span><a class="cc-link" href="https://coston2-explorer.flare.network/address/0x87620D3CaCd8B0a5a861fa376E6554373345e267" target="_blank">Explorer ↗</a></div>
+    <div class="contract-card"><div class="cc-accent" style="background:var(--red)"></div><div class="cc-name">CAVOKBuybackTreasury</div><div class="cc-addr">0x8311...47D</div><div class="cc-text">Automated daily harvest via Gelato → BlazeSwap DEX → CAVOK token burn. GitHub Actions fallback at 00:07 UTC. Transparent on-chain log of every burn.</div><span class="cc-tag">Daily burn</span></div>
+    <div class="contract-card"><div class="cc-accent" style="background:var(--amber)"></div><div class="cc-name">CAVOKOpsTreasury</div><div class="cc-addr">0x9cD9...4b9</div><div class="cc-text">Weekly harvest from 7% ops stake. Funds development, legal, audit, and platform operations. Full withdrawal log on-chain.</div><span class="cc-tag">Ops</span></div>
+    <div class="contract-card" style="grid-column:1/-1;background:var(--ink3)"><div class="cc-accent" style="background:var(--cream3)"></div><div class="cc-name" style="padding-left:12px">CAVOKTokenFactory · Deployed SPV suites (active)</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:12px 12px 0"><div><div class="cc-addr" style="padding-left:0;color:var(--green)">Villa A suite</div><div class="cc-text" style="padding-left:0">Token: 0x6d74...6a6c · Commitment: 0x44Ff...2b79 · Lifecycle: 0x761A...9b37</div></div><div><div class="cc-addr" style="padding-left:0;color:var(--purple)">Reform Villa suite</div><div class="cc-text" style="padding-left:0">Token: 0x2394...2bd1 · Commitment: 0xBE39...7E38 · Lifecycle: 0x2251...f8Ee</div></div></div></div>
+  </div>
+</div>
+
+<!-- CAPITAL FLOWS -->
+<div class="flows-section" style="padding:80px 52px">
+  <div class="sec-num reveal">Capital architecture</div>
+  <h2 class="sec-title reveal" style="margin-bottom:52px">How capital moves<br>through CAVOK</h2>
+  <div class="flow-block reveal">
+    <div class="flow-label">Investor commitment flow</div>
+    <div class="flow-steps">
+      <div class="flow-box gold">Investor USDT0</div><div class="flow-arrow">→</div>
+      <div class="flow-box">MMVACommitment escrow</div><div class="flow-arrow">→</div>
+      <div class="flow-box gold">Hard cap reached</div><div class="flow-arrow">→</div>
+      <div class="flow-box">activate()</div><div class="flow-arrow">→</div>
+      <div class="flow-box green">Tokens minted pro-rata ✓</div>
+    </div>
+  </div>
+  <div class="flow-block reveal">
+    <div class="flow-label">Vault yield flow (79% stake)</div>
+    <div class="flow-steps">
+      <div class="flow-box">79% idle capital</div><div class="flow-arrow">→</div>
+      <div class="flow-box blue">Mystic Finance vault (12.4%)</div><div class="flow-arrow">→</div>
+      <div class="flow-box">depositVaultYield()</div><div class="flow-arrow">→</div>
+      <div class="flow-box green">claimYield() → investor USDT0</div>
+    </div>
+  </div>
+  <div class="flow-block reveal">
+    <div class="flow-label">Buyback flow (14% CAVOK stake)</div>
+    <div class="flow-steps">
+      <div class="flow-box">14% in Upshift Vaults (11.8%)</div><div class="flow-arrow">→</div>
+      <div class="flow-box amber">Gelato harvest() daily</div><div class="flow-arrow">→</div>
+      <div class="flow-box">BlazeSwap USDT0 → CAVOK</div><div class="flow-arrow">→</div>
+      <div class="flow-box red">Burn 🔥</div>
+    </div>
+  </div>
+  <div class="flow-block reveal">
+    <div class="flow-label">Secondary market compound flow</div>
+    <div class="flow-steps">
+      <div class="flow-box">Pending yield</div><div class="flow-arrow">→</div>
+      <div class="flow-box gold">compoundYield()</div><div class="flow-arrow">→</div>
+      <div class="flow-box">claimYield() + buyFromPool()</div><div class="flow-arrow">→</div>
+      <div class="flow-box green">Tokens received · atomic</div>
+    </div>
+  </div>
+</div>
+
+<!-- STACK -->
+<div class="stack-section">
+  <div style="padding-bottom:40px">
+    <div class="sec-num reveal">Tech stack</div>
+    <h2 class="sec-title reveal" style="margin-bottom:0">Everything we're<br>built on</h2>
+  </div>
+  <div class="stack-grid reveal">
+    <div class="stack-item"><div class="stack-cat">Network</div><div class="stack-val">Flare Network (chainId 14 mainnet · 114 Coston2 testnet). EVM-compatible. Native FTSO v2 oracle and FAssets protocol.</div></div>
+    <div class="stack-item"><div class="stack-cat">Language</div><div class="stack-val">Solidity 0.8.24 · OpenZeppelin contracts · Hardhat development framework · verified source on Coston2 explorer</div></div>
+    <div class="stack-item"><div class="stack-cat">Oracles</div><div class="stack-val">FTSO v2 for FLR/USD price feed · Flare Data Connector (FDC) for off-chain property value attestation (P2)</div></div>
+    <div class="stack-item"><div class="stack-cat">Payments</div><div class="stack-val">USDT0 (now) · FLR via FTSO (P1) · FXRP via FAssets (P2) · FBTC via FAssets (P3)</div></div>
+    <div class="stack-item"><div class="stack-cat">Automation</div><div class="stack-val">GitHub Actions cron at 00:07 UTC · Gelato Network when Flare mainnet supported · BlazeSwap DEX for buyback execution</div></div>
+    <div class="stack-item"><div class="stack-cat">Frontend</div><div class="stack-val">Next.js 14 (app router) · TypeScript · Tailwind · RainbowKit + wagmi + viem v2 · Bifrost / MetaMask / WalletConnect</div></div>
+    <div class="stack-item"><div class="stack-cat">Security</div><div class="stack-val">Gnosis Safe 2-of-3 multisig (pre-mainnet) · Certik / Halborn audit target · Pausable contracts · admin override</div></div>
+    <div class="stack-item"><div class="stack-cat">DeFi yield</div><div class="stack-val">Mystic Finance (investor 79%) · Upshift Vaults (CAVOK 14%) · Kinetic (ops 7%) — all on Flare Network</div></div>
+  </div>
+</div>
+
+<footer>
+  <div><div class="ft-mark"><div class="ft-sigil">◎</div><div class="ft-name">Cavok</div></div><p class="ft-tagline">Programmable real estate capital on Flare Network.</p><div class="ft-network">Flare Network · Coston2 · Mainnet Q3 2026</div></div>
+  <div class="ft-col"><h4>Platform</h4><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="about.html">About</a></div>
+  <div class="ft-col"><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+  <div class="ft-col"><h4>Network</h4><a href="https://flare.network" target="_blank">Flare Network</a><a href="https://coston2-explorer.flare.network" target="_blank">Explorer</a></div>
+  <div class="ft-bottom"><p class="ft-legal">CAVOK tokens are profit-participating loan instruments and are not classified as securities under MiFID II in most EU jurisdictions. For informational purposes only.</p><span class="ft-copy">© 2026 CAVOK</span></div>
+</footer>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function ac(){cur.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`;rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(ac);}ac();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%) scale(2.5)`;ring.style.opacity='.3';});el.addEventListener('mouseleave',()=>{cur.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%) scale(1)`;ring.style.opacity='1';});});
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target);}});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
