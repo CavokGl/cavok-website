@@ -141,9 +141,9 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
     <p class="pg-sub">Each project is a separate on-chain SPV with its own token, commitment contract, and lifecycle. Select a category to filter.</p>
   </div>
   <div class="filter-tabs reveal">
-    <button class="filter-tab active" onclick="filter('all',this)">All <span class="tab-count">8</span></button>
-    <button class="filter-tab" onclick="filter('development',this)">Development <span class="tab-count">3</span></button>
-    <button class="filter-tab" onclick="filter('rental',this)">Rental Residential <span class="tab-count">2</span></button>
+    <button class="filter-tab active" onclick="filter('all',this)">All <span class="tab-count">5</span></button>
+    <button class="filter-tab" onclick="filter('development',this)">Development <span class="tab-count">2</span></button>
+    <button class="filter-tab" onclick="filter('rental',this)">Rental Residential <span class="tab-count">1</span></button>
     <button class="filter-tab" onclick="filter('commercial',this)">Commercial <span class="tab-count">1</span></button>
     <button class="filter-tab" onclick="filter('industrial',this)">Industrial <span class="tab-count">1</span></button>
   </div>
@@ -156,69 +156,54 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
     <div class="cat-header">
       <div class="cat-title">Development</div>
       <span class="cat-pill badge-blue">Off-plan</span>
-      <div class="cat-desc">Vault yield active from day one. Exit gain at project completion.</div>
+      <div class="cat-desc">Luxury villa development in Monte Mayor Golf &amp; Resort, Benahav&iacute;s.</div>
     </div>
-    <div class="proj-grid g3">
+    <div class="proj-grid g2">
       <div class="proj-card">
         <div class="proj-top">
-          <div class="proj-badges"><span class="badge badge-blue">Development</span><span class="badge badge-green">Active</span></div>
+          <div class="proj-badges"><span class="badge badge-blue">Development</span><span class="badge badge-amber">In negotiation</span></div>
           <div class="proj-name">Monte Mayor Villa A</div>
-          <div class="proj-loc">Benahavis · Marbella · Costa del Sol</div>
+          <div class="proj-loc">Benahav&iacute;s &middot; Marbella &middot; Costa del Sol</div>
           <div class="proj-rows">
-            <div class="proj-row"><span class="rl">Token price</span><span class="rv">1,000 USDT0</span></div>
-            <div class="proj-row"><span class="rl">Total supply</span><span class="rv">3,456 MMV-A</span></div>
-            <div class="proj-row"><span class="rl">Vault APY</span><span class="rv gr">12.4%</span></div>
-            <div class="proj-row"><span class="rl">Exit target</span><span class="rv go">5,500,000 USDT0 · M48</span></div>
+            <div class="proj-row"><span class="rl">Token price</span><span class="rv">100 USDT0</span></div>
+            <div class="proj-row"><span class="rl">Total supply</span><span class="rv">34,560 MMV-A</span></div>
+            <div class="proj-row"><span class="rl">Asset value</span><span class="rv">&euro;3,456,000</span></div>
+            <div class="proj-row"><span class="rl">Exit target</span><span class="rv go">+43% est. &middot; Month 48</span></div>
+            <div class="proj-row"><span class="rl">Vault yield</span><span class="rv"><a href="https://cavok-dapp.vercel.app/projects" target="_blank" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--border2)">Login to view live APY</a></span></div>
+            <div class="proj-row"><span class="rl">Hold period</span><span class="rv">4 years</span></div>
             <div class="proj-row"><span class="rl">SPV</span><span class="rv" style="font-family:monospace;font-size:10px;color:var(--gold)">SPV_MM_A</span></div>
           </div>
           <div class="proj-prog-wrap">
-            <div class="proj-prog-lbl"><span>Commitment</span><span>Fully funded ✓</span></div>
-            <div class="proj-prog"><div class="proj-prog-fill" style="width:100%;background:var(--green)"></div></div>
+            <div class="proj-prog-lbl"><span>Land acquisition</span><span>In negotiation</span></div>
+            <div class="proj-prog"><div class="proj-prog-fill" style="width:15%;background:var(--amber)"></div></div>
           </div>
         </div>
-        <div class="proj-bottom"><a class="proj-btn btn-gold" href="contact.html">Request position update</a></div>
+        <div class="proj-bottom"><a class="proj-btn btn-gold" href="contact.html">Request access</a></div>
       </div>
 
       <div class="proj-card">
         <div class="proj-top">
-          <div class="proj-badges"><span class="badge badge-amber">Coming soon</span><span class="badge badge-muted">Reservations open</span></div>
-          <div class="proj-name">Monte Mayor Villa C</div>
-          <div class="proj-loc">Benahavis · Marbella · Costa del Sol</div>
-          <div class="proj-rows">
-            <div class="proj-row"><span class="rl">Token price</span><span class="rv">1,000 USDT0</span></div>
-            <div class="proj-row"><span class="rl">Reservation</span><span class="rv gr">Free · gas only</span></div>
-            <div class="proj-row"><span class="rl">Threshold</span><span class="rv">10 reservations</span></div>
-            <div class="proj-row"><span class="rl">Progress</span><span class="rv am">1 / 10</span></div>
-            <div class="proj-row"><span class="rl">SPV</span><span class="rv" style="font-family:monospace;font-size:10px;color:var(--gold)">SPV_MM_C · Pending</span></div>
-          </div>
-          <div class="proj-prog-wrap">
-            <div class="proj-prog-lbl"><span>Reservations</span><span>1 / 10</span></div>
-            <div class="proj-prog"><div class="proj-prog-fill" style="width:10%;background:var(--amber)"></div></div>
-          </div>
-        </div>
-        <div class="proj-bottom"><a class="proj-btn btn-out" href="contact.html">Reserve a spot — free</a></div>
-      </div>
-
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-badges"><span class="badge badge-blue">Development</span><span class="badge badge-muted">Q3 2026 · Pipeline</span></div>
+          <div class="proj-badges"><span class="badge badge-blue">Development</span><span class="badge badge-amber">In negotiation</span></div>
           <div class="proj-name">Monte Mayor Villa B</div>
-          <div class="proj-loc">Benahavis · Marbella · Costa del Sol</div>
+          <div class="proj-loc">Benahav&iacute;s &middot; Marbella &middot; Costa del Sol</div>
           <div class="proj-rows">
             <div class="proj-row"><span class="rl">Token price</span><span class="rv">100 USDT0</span></div>
-            <div class="proj-row"><span class="rl">Total supply</span><span class="rv">32,000 MMV-B</span></div>
-            <div class="proj-row"><span class="rl">Vault APY est.</span><span class="rv gr">12.4%</span></div>
-            <div class="proj-row"><span class="rl">Exit target</span><span class="rv go">4,800,000 USDT0 · M48</span></div>
-            <div class="proj-row"><span class="rl">SPV</span><span class="rv" style="font-family:monospace;font-size:10px;color:var(--gold)">SPV_MM_B · Pending</span></div>
+            <div class="proj-row"><span class="rl">Total supply</span><span class="rv">34,560 MMV-B</span></div>
+            <div class="proj-row"><span class="rl">Asset value</span><span class="rv">&euro;3,456,000</span></div>
+            <div class="proj-row"><span class="rl">Exit target</span><span class="rv go">+43% est. &middot; Month 48</span></div>
+            <div class="proj-row"><span class="rl">Vault yield</span><span class="rv"><a href="https://cavok-dapp.vercel.app/projects" target="_blank" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--border2)">Login to view live APY</a></span></div>
+            <div class="proj-row"><span class="rl">Hold period</span><span class="rv">4 years</span></div>
+            <div class="proj-row"><span class="rl">SPV</span><span class="rv" style="font-family:monospace;font-size:10px;color:var(--gold)">SPV_MM_B</span></div>
           </div>
           <div class="proj-prog-wrap">
-            <div class="proj-prog-lbl"><span>Commitment</span><span>Opens Q3 2026</span></div>
-            <div class="proj-prog"><div class="proj-prog-fill" style="width:0%;background:var(--blue)"></div></div>
+            <div class="proj-prog-lbl"><span>Land acquisition</span><span>In negotiation</span></div>
+            <div class="proj-prog"><div class="proj-prog-fill" style="width:15%;background:var(--amber)"></div></div>
           </div>
         </div>
-        <div class="proj-bottom"><a class="proj-btn btn-out" href="contact.html">Register interest</a></div>
+        <div class="proj-bottom"><a class="proj-btn btn-gold" href="contact.html">Request access</a></div>
       </div>
     </div>
+    <div style="margin-top:14px;font-size:9px;font-weight:300;color:var(--cream3);font-style:italic">* Illustrative projections only. Not financial advice. Subject to land acquisition completion.</div>
   </div>
 
   <!-- RENTAL RESIDENTIAL -->
@@ -226,45 +211,13 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
     <div class="cat-header">
       <div class="cat-title">Rental Residential</div>
       <span class="cat-pill badge-purple">Rental</span>
-      <div class="cat-desc">Immediate rental income as conditional interest. Starts directly in Rental state.</div>
+      <div class="cat-desc">Residential rental properties generating monthly income.</div>
     </div>
     <div class="proj-grid g2">
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-badges"><span class="badge badge-purple">Rental Residential</span><span class="badge badge-green">Active</span></div>
-          <div class="proj-name">Reform Villa Marbella</div>
-          <div class="proj-loc">Marbella · Costa del Sol · Spain</div>
-          <div class="proj-rows">
-            <div class="proj-row"><span class="rl">Token price</span><span class="rv">1,000 USDT0</span></div>
-            <div class="proj-row"><span class="rl">Yield start</span><span class="rv pu">Immediate</span></div>
-            <div class="proj-row"><span class="rl">Vault APY</span><span class="rv gr">12.4%</span></div>
-            <div class="proj-row"><span class="rl">Rental est.</span><span class="rv pu">~12% annual</span></div>
-            <div class="proj-row"><span class="rl">SPV</span><span class="rv" style="font-family:monospace;font-size:10px;color:var(--gold)">SPV_MR_A</span></div>
-          </div>
-          <div class="proj-prog-wrap">
-            <div class="proj-prog-lbl"><span>Commitment</span><span>Fully funded ✓</span></div>
-            <div class="proj-prog"><div class="proj-prog-fill" style="width:100%;background:var(--purple)"></div></div>
-          </div>
-        </div>
-        <div class="proj-bottom"><a class="proj-btn btn-gold" href="contact.html">Request position update</a></div>
-      </div>
-
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-badges"><span class="badge badge-purple">Rental Residential</span><span class="badge badge-amber">Q4 2026</span></div>
-          <div class="proj-name">Beachfront Apartment Estepona</div>
-          <div class="proj-loc">Estepona · Costa del Sol · Spain</div>
-          <div class="proj-rows">
-            <div class="proj-row"><span class="rl">Token price</span><span class="rv">100 USDT0</span></div>
-            <div class="proj-row"><span class="rl">Total supply</span><span class="rv">18,500 EST-A</span></div>
-            <div class="proj-row"><span class="rl">Vault APY est.</span><span class="rv gr">12.4%</span></div>
-            <div class="proj-row"><span class="rl">Rental est.</span><span class="rv pu">~10% annual</span></div>
-            <div class="proj-row"><span class="rl">SPV</span><span class="rv" style="font-family:monospace;font-size:10px;color:var(--gold)">SPV_EST_A · Pending</span></div>
-          </div>
-          <div class="proj-prog-wrap">
-            <div class="proj-prog-lbl"><span>Commitment</span><span>Opens Q4 2026</span></div>
-            <div class="proj-prog"><div class="proj-prog-fill" style="width:0%;background:var(--purple)"></div></div>
-          </div>
+      <div class="proj-card proj-dim">
+        <div class="placeholder-body">
+          <div class="ph-icon">◎</div>
+          <div class="ph-text">Rental Residential &middot; Costa del Sol<br>Coming soon</div>
         </div>
         <div class="proj-bottom"><a class="proj-btn btn-out" href="contact.html">Register interest</a></div>
       </div>
@@ -276,31 +229,14 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
     <div class="cat-header">
       <div class="cat-title">Commercial</div>
       <span class="cat-pill badge-amber">Commercial</span>
-      <div class="cat-desc">Hotels and mixed-use properties. Higher management fee. Starts in Rental state. P2 roadmap.</div>
+      <div class="cat-desc">Hotels and mixed-use commercial properties.</div>
     </div>
     <div class="proj-grid g2">
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-badges"><span class="badge badge-amber">Commercial</span><span class="badge badge-muted">P2 · Q1 2027</span></div>
-          <div class="proj-name">Boutique Hotel Marbella</div>
-          <div class="proj-loc">Golden Mile · Marbella · Costa del Sol</div>
-          <div class="proj-rows">
-            <div class="proj-row"><span class="rl">Token price</span><span class="rv">100 USDT0</span></div>
-            <div class="proj-row"><span class="rl">Total supply</span><span class="rv">85,000 MBH-A</span></div>
-            <div class="proj-row"><span class="rl">Rooms</span><span class="rv am">12 · boutique</span></div>
-            <div class="proj-row"><span class="rl">Rental est.</span><span class="rv am">~14% annual</span></div>
-            <div class="proj-row"><span class="rl">Mgmt fee</span><span class="rv">12%</span></div>
-          </div>
-          <div class="proj-prog-wrap">
-            <div class="proj-prog-lbl"><span>Pipeline</span><span>Q1 2027</span></div>
-            <div class="proj-prog"><div class="proj-prog-fill" style="width:0%;background:var(--amber)"></div></div>
-          </div>
-        </div>
-        <div class="proj-bottom"><a class="proj-btn btn-out" href="contact.html">Register interest</a></div>
-      </div>
-
       <div class="proj-card proj-dim">
-        <div class="placeholder-body"><div class="ph-icon">◎</div><div class="ph-text">Additional commercial properties<br>in pipeline · 2027</div></div>
+        <div class="placeholder-body">
+          <div class="ph-icon">◎</div>
+          <div class="ph-text">Commercial &middot; Marbella region<br>2027</div>
+        </div>
         <div class="proj-bottom"><a class="proj-btn btn-out" href="contact.html">Register interest</a></div>
       </div>
     </div>
@@ -311,31 +247,14 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
     <div class="cat-header">
       <div class="cat-title">Industrial</div>
       <span class="cat-pill badge-red">Industrial</span>
-      <div class="cat-desc">Office and coworking spaces. Long-term leases with stable income. P2 roadmap.</div>
+      <div class="cat-desc">Office and coworking spaces with long-term leases.</div>
     </div>
     <div class="proj-grid g2">
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-badges"><span class="badge badge-red">Industrial</span><span class="badge badge-muted">P2 · Q1 2027</span></div>
-          <div class="proj-name">Coworking Nueva Andalucía</div>
-          <div class="proj-loc">Nueva Andalucía · Marbella · Costa del Sol</div>
-          <div class="proj-rows">
-            <div class="proj-row"><span class="rl">Token price</span><span class="rv">100 USDT0</span></div>
-            <div class="proj-row"><span class="rl">Total supply</span><span class="rv">42,000 CNA-A</span></div>
-            <div class="proj-row"><span class="rl">Lease type</span><span class="rv re">Long-term · triple net</span></div>
-            <div class="proj-row"><span class="rl">Rental est.</span><span class="rv gr">~9% annual</span></div>
-            <div class="proj-row"><span class="rl">Capacity</span><span class="rv">120 desks · 8 offices</span></div>
-          </div>
-          <div class="proj-prog-wrap">
-            <div class="proj-prog-lbl"><span>Pipeline</span><span>Q1 2027</span></div>
-            <div class="proj-prog"><div class="proj-prog-fill" style="width:0%;background:var(--red)"></div></div>
-          </div>
-        </div>
-        <div class="proj-bottom"><a class="proj-btn btn-out" href="contact.html">Register interest</a></div>
-      </div>
-
       <div class="proj-card proj-dim">
-        <div class="placeholder-body"><div class="ph-icon">◎</div><div class="ph-text">Additional office &amp; industrial<br>properties in pipeline · 2027</div></div>
+        <div class="placeholder-body">
+          <div class="ph-icon">◎</div>
+          <div class="ph-text">Industrial &middot; Southern Spain<br>2027</div>
+        </div>
         <div class="proj-bottom"><a class="proj-btn btn-out" href="contact.html">Register interest</a></div>
       </div>
     </div>
@@ -348,7 +267,7 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
   <div class="ft-col"><h4>Platform</h4><a href="index.html">Home</a><a href="technology.html">Technology</a><a href="about.html">About</a></div>
   <div class="ft-col"><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a></div>
   <div class="ft-col"><h4>Network</h4><a href="https://flare.network" target="_blank">Flare Network</a><a href="https://coston2-explorer.flare.network" target="_blank">Explorer</a></div>
-  <div class="ft-bottom"><p class="ft-legal">CAVOK tokens are profit-participating loan instruments and are not classified as securities under MiFID II in most EU jurisdictions. This website is for informational purposes only.</p><span class="ft-copy">© 2026 CAVOK</span></div>
+  <div class="ft-bottom"><p class="ft-legal">CAVOK tokens are profit-participating loan instruments. This website is for informational purposes only and does not constitute an offer, solicitation, or financial advice. Projected returns are illustrative estimates only and not guaranteed. Villa A and Villa B are subject to completion of land acquisition. Access to investment details requires KYC verification. Not available to US persons.</p><span class="ft-copy">&copy; 2026 CAVOK</span></div>
 </footer>
 
 <script>
