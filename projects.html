@@ -92,6 +92,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 52px;display:fl
 .placeholder-body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;gap:12px;padding:32px}
 .ph-icon{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold);opacity:.25}
 .ph-text{font-size:11px;font-weight:300;color:var(--cream3);text-align:center;line-height:1.7}
+.pipe-card{padding:32px 28px;display:flex;flex-direction:column;gap:16px}
+.pipe-badges{display:flex;gap:7px;flex-wrap:wrap}
+.pipe-desc{font-size:12px;font-weight:300;color:var(--cream3);line-height:1.85}
+.pipe-timeline{font-size:10px;font-weight:300;letter-spacing:1.5px;text-transform:uppercase;color:var(--cream3);opacity:.6;margin-top:auto;padding-top:8px}
+.why-section{padding:0 52px;margin-bottom:8px}
+.why-card{background:var(--ink2);border:1px solid var(--border);padding:40px 44px;position:relative;overflow:hidden}
+.why-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--gold),transparent)}
+.why-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--cream);margin-bottom:16px}
+.why-body{font-size:12px;font-weight:300;color:var(--cream3);line-height:2;max-width:720px}
+@media(max-width:900px){.why-section{padding:0 24px}}
 
 footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px}
 .ft-mark{display:flex;align-items:center;gap:12px;margin-bottom:14px}
@@ -146,6 +156,13 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
     <button class="filter-tab" onclick="filter('rental',this)">Rental Residential <span class="tab-count">1</span></button>
     <button class="filter-tab" onclick="filter('commercial',this)">Commercial <span class="tab-count">1</span></button>
     <button class="filter-tab" onclick="filter('industrial',this)">Industrial <span class="tab-count">1</span></button>
+  </div>
+</div>
+
+<div class="why-section reveal">
+  <div class="why-card">
+    <div class="why-title">Why Marbella</div>
+    <div class="why-body">Marbella has recorded the strongest property price growth in Europe over the past decade &mdash; and shows no signs of slowing. International demand from Northern Europe, the Middle East, and Latin America continues to outpace supply. Benahav&iacute;s, where CAVOK&rsquo;s first project is located, sits at the apex of this market &mdash; a gated luxury corridor with restricted land supply, panoramic sea views, and consistent price appreciation. We chose Marbella not because it is popular, but because the fundamentals are exceptional.</div>
   </div>
 </div>
 
@@ -211,13 +228,14 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
     <div class="cat-header">
       <div class="cat-title">Rental Residential</div>
       <span class="cat-pill badge-purple">Rental</span>
-      <div class="cat-desc">Residential rental properties generating monthly income.</div>
+      <div class="cat-desc">Monthly rental income distributed to token holders.</div>
     </div>
     <div class="proj-grid g2">
-      <div class="proj-card proj-dim">
-        <div class="placeholder-body">
-          <div class="ph-icon">◎</div>
-          <div class="ph-text">Rental Residential &middot; Costa del Sol<br>Coming soon</div>
+      <div class="proj-card">
+        <div class="pipe-card">
+          <div class="pipe-badges"><span class="badge badge-purple">Rental Residential</span><span class="badge badge-muted">Pipeline</span></div>
+          <div class="pipe-desc">Immediate rental income distributed monthly to token holders as conditional interest. Costa del Sol properties benefit from one of Europe&rsquo;s longest rental seasons &mdash; 10+ months of high occupancy driven by international demand.</div>
+          <div class="pipe-timeline">Pipeline 2026</div>
         </div>
         <div class="proj-bottom"><a class="proj-btn btn-out" href="contact.html">Register interest</a></div>
       </div>
@@ -229,13 +247,14 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
     <div class="cat-header">
       <div class="cat-title">Commercial</div>
       <span class="cat-pill badge-amber">Commercial</span>
-      <div class="cat-desc">Hotels and mixed-use commercial properties.</div>
+      <div class="cat-desc">Hotels, mixed-use, and premium commercial assets.</div>
     </div>
     <div class="proj-grid g2">
-      <div class="proj-card proj-dim">
-        <div class="placeholder-body">
-          <div class="ph-icon">◎</div>
-          <div class="ph-text">Commercial &middot; Marbella region<br>2027</div>
+      <div class="proj-card">
+        <div class="pipe-card">
+          <div class="pipe-badges"><span class="badge badge-amber">Commercial</span><span class="badge badge-muted">Pipeline</span></div>
+          <div class="pipe-desc">Hotels, mixed-use, and premium commercial assets in the Marbella Golden Mile and surrounding area. Higher management yield with immediate rental state activation. Strong occupancy driven by international tourism.</div>
+          <div class="pipe-timeline">Pipeline 2027</div>
         </div>
         <div class="proj-bottom"><a class="proj-btn btn-out" href="contact.html">Register interest</a></div>
       </div>
@@ -247,13 +266,14 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
     <div class="cat-header">
       <div class="cat-title">Industrial</div>
       <span class="cat-pill badge-red">Industrial</span>
-      <div class="cat-desc">Office and coworking spaces with long-term leases.</div>
+      <div class="cat-desc">Logistics and warehousing with long-term leases.</div>
     </div>
     <div class="proj-grid g2">
-      <div class="proj-card proj-dim">
-        <div class="placeholder-body">
-          <div class="ph-icon">◎</div>
-          <div class="ph-text">Industrial &middot; Southern Spain<br>2027</div>
+      <div class="proj-card">
+        <div class="pipe-card">
+          <div class="pipe-badges"><span class="badge badge-red">Industrial</span><span class="badge badge-muted">Pipeline</span></div>
+          <div class="pipe-desc">Logistics and warehousing assets in Southern Spain&rsquo;s growing logistics corridor. Long-term triple-net leases providing stable, low-variance income. Ideal for investors seeking predictable returns.</div>
+          <div class="pipe-timeline">Pipeline 2027</div>
         </div>
         <div class="proj-bottom"><a class="proj-btn btn-out" href="contact.html">Register interest</a></div>
       </div>
