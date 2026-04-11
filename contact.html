@@ -79,7 +79,7 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
     <a class="nav-link" href="projects.html">Projects</a>
     <a class="nav-link" href="technology.html">Technology</a>
     <a class="nav-link" href="about.html">About</a>
-    <a class="nav-cta active" href="mailto:hello@cavokestates.com?subject=CAVOK%20-%20Request%20Access">Request Access</a>
+    <button class="nav-cta active" onclick="document.getElementById('access-modal').style.display='flex'">Request Access</button>
   </div>
 </nav>
 
@@ -140,4 +140,43 @@ function ac(){cur.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50
 document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%) scale(2.5)`;ring.style.opacity='.3';});el.addEventListener('mouseleave',()=>{cur.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%) scale(1)`;ring.style.opacity='1';});});
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target);}});},{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-function handleSubmit(e){const btn=document.getElementById('submit-btn');btn.textContent='Sending...';btn.style.opacity='.7';setTimeout(()=>{btn.textConten
+function handleSubmit(e){const btn=document.getElementById('submit-btn');btn.textContent='Sending...';btn.style.opacity='.7';setTimeout(()=>{btn.textContent='Sent';btn.style.opacity='1';},1500);}
+function handleAccessForm(e){e.preventDefault();document.getElementById('modal-form-wrap').style.display='none';document.getElementById('modal-confirm').style.display='block';return false;}
+</script>
+<style>
+.modal-overlay{display:none;position:fixed;inset:0;z-index:10000;align-items:center;justify-content:center;background:rgba(10,13,18,.82);backdrop-filter:blur(12px);padding:24px}
+.modal-box{background:var(--ink2);border:1px solid rgba(184,149,90,.18);border-radius:2px;width:100%;max-width:440px;padding:40px 36px;position:relative}
+.modal-close{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--cream3);font-size:20px;cursor:pointer;padding:4px 8px;line-height:1}.modal-close:hover{color:var(--cream)}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--cream);margin-bottom:6px}
+.modal-sub{font-size:12px;font-weight:300;color:var(--cream3);margin-bottom:28px}
+.modal-field{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+.modal-field label{font-size:9px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:var(--cream3)}
+.modal-field input,.modal-field textarea{background:var(--ink);border:1px solid rgba(184,149,90,.12);color:var(--cream);padding:11px 14px;font-family:'Jost',sans-serif;font-size:13px;font-weight:300;outline:none;transition:border-color .2s;border-radius:1px}
+.modal-field input:focus,.modal-field textarea:focus{border-color:rgba(184,149,90,.4)}
+.modal-field textarea{min-height:80px;resize:vertical}
+.modal-submit{width:100%;padding:14px;background:var(--gold);color:var(--ink);border:none;font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-top:6px;border-radius:1px}.modal-submit:hover{background:var(--gold2)}
+.modal-confirm{text-align:center;padding:20px 0}.modal-confirm .check{font-size:32px;color:var(--gold);margin-bottom:12px}
+.modal-confirm p{font-size:13px;font-weight:300;color:var(--cream3);line-height:1.7}.modal-confirm a{color:var(--gold);text-decoration:none}
+</style>
+<div id="access-modal" class="modal-overlay" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('access-modal').style.display='none'">&times;</button>
+    <div id="modal-form-wrap">
+      <div class="modal-title">Request Access</div>
+      <div class="modal-sub">We will be in touch shortly.</div>
+      <form id="access-form" onsubmit="return handleAccessForm(event)">
+        <div class="modal-field"><label>Full name</label><input type="text" name="name" required></div>
+        <div class="modal-field"><label>Email</label><input type="email" name="email" required></div>
+        <div class="modal-field"><label>Message <span style="opacity:.5">(optional)</span></label><textarea name="message" placeholder="Tell us about yourself or your interest in CAVOK"></textarea></div>
+        <button type="submit" class="modal-submit">Send Request</button>
+      </form>
+    </div>
+    <div id="modal-confirm" class="modal-confirm" style="display:none">
+      <div class="check">&#10003;</div>
+      <div class="modal-title" style="margin-bottom:12px">Thank you</div>
+      <p>We will be in touch at <a href="mailto:hello@cavokestates.com">hello@cavokestates.com</a></p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
