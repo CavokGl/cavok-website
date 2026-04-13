@@ -23,7 +23,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 52px;display:fl
 .nav-mark{display:flex;align-items:center;gap:14px;text-decoration:none}
 .nav-sigil{width:30px;height:30px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:11px;color:var(--gold);transition:all .25s}
 .nav-mark:hover .nav-sigil{background:var(--gold);color:var(--ink)}
-.nav-wordmark{font-family:'Jost',sans-serif;font-weight:200;font-size:15px;letter-spacing:6px;text-transform:uppercase;color:var(--cream)}
+.nav-wordmark{font-family:'Jost',sans-serif;font-weight:200;font-size:15px;letter-spacing:6px;text-transform:uppercase;color:#d4a86a}.nav-subtitle{font-family:'Jost',sans-serif;font-weight:300;font-size:11px;letter-spacing:1px;color:var(--cream3);margin-left:12px}
 .nav-right{display:flex;align-items:center;gap:40px}
 .nav-link{font-size:10px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:var(--cream3);text-decoration:none;transition:color .2s}
 .nav-link:hover,.nav-link.active{color:var(--cream2)}
@@ -135,7 +135,7 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
 <div id="cursor-ring"></div>
 
 <nav>
-  <a class="nav-mark" href="index.html"><div class="nav-sigil">◎</div><div class="nav-wordmark">Cavok</div></a>
+  <a class="nav-mark" href="index.html"><div class="nav-sigil">◎</div><div class="nav-wordmark">Cavok</div><span class="nav-subtitle">Next-gen tokenization</span></a>
   <div class="nav-right">
     <a class="nav-link active" href="projects.html">Projects</a>
     <a class="nav-link" href="technology.html">Technology</a>
@@ -151,11 +151,13 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
     <p class="pg-sub">Each project is a separate on-chain SPV with its own token, commitment contract, and lifecycle. Select a category to filter.</p>
   </div>
   <div class="filter-tabs reveal">
-    <button class="filter-tab active" onclick="filter('all',this)">All <span class="tab-count">5</span></button>
+    <button class="filter-tab active" onclick="filter('all',this)">All <span class="tab-count">7</span></button>
     <button class="filter-tab" onclick="filter('development',this)">Development <span class="tab-count">2</span></button>
     <button class="filter-tab" onclick="filter('rental',this)">Rental Residential <span class="tab-count">1</span></button>
     <button class="filter-tab" onclick="filter('commercial',this)">Commercial <span class="tab-count">1</span></button>
     <button class="filter-tab" onclick="filter('industrial',this)">Industrial <span class="tab-count">1</span></button>
+    <button class="filter-tab" onclick="filter('collectables',this)">Collectables <span class="tab-count">1</span></button>
+    <button class="filter-tab" onclick="filter('jets',this)">Private Jets <span class="tab-count">1</span></button>
   </div>
 </div>
 
@@ -185,7 +187,7 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
             <div class="proj-row"><span class="rl">Token price</span><span class="rv">100 USDT0</span></div>
             <div class="proj-row"><span class="rl">Total supply</span><span class="rv">34,560 MMV-A</span></div>
             <div class="proj-row"><span class="rl">Asset value</span><span class="rv">&euro;3,456,000</span></div>
-            <div class="proj-row"><span class="rl">Exit target</span><span class="rv go">+43% est. &middot; Month 48</span></div>
+            <div class="proj-row"><span class="rl">Exit horizon</span><span class="rv">Est. Month 48 &middot; subject to market</span></div>
             <div class="proj-row"><span class="rl">Vault yield</span><span class="rv"><a href="https://cavok-dapp.vercel.app/projects" target="_blank" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--border2)">Login to view live APY</a></span></div>
             <div class="proj-row"><span class="rl">Hold period</span><span class="rv">4 years</span></div>
             <div class="proj-row"><span class="rl">SPV</span><span class="rv" style="font-family:monospace;font-size:10px;color:var(--gold)">SPV_MM_A</span></div>
@@ -207,7 +209,7 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
             <div class="proj-row"><span class="rl">Token price</span><span class="rv">100 USDT0</span></div>
             <div class="proj-row"><span class="rl">Total supply</span><span class="rv">34,560 MMV-B</span></div>
             <div class="proj-row"><span class="rl">Asset value</span><span class="rv">&euro;3,456,000</span></div>
-            <div class="proj-row"><span class="rl">Exit target</span><span class="rv go">+43% est. &middot; Month 48</span></div>
+            <div class="proj-row"><span class="rl">Exit horizon</span><span class="rv">Est. Month 48 &middot; subject to market</span></div>
             <div class="proj-row"><span class="rl">Vault yield</span><span class="rv"><a href="https://cavok-dapp.vercel.app/projects" target="_blank" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--border2)">Login to view live APY</a></span></div>
             <div class="proj-row"><span class="rl">Hold period</span><span class="rv">4 years</span></div>
             <div class="proj-row"><span class="rl">SPV</span><span class="rv" style="font-family:monospace;font-size:10px;color:var(--gold)">SPV_MM_B</span></div>
@@ -272,8 +274,44 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
       <div class="proj-card">
         <div class="pipe-card">
           <div class="pipe-badges"><span class="badge badge-red">Industrial</span><span class="badge badge-muted">Pipeline</span></div>
-          <div class="pipe-desc">Logistics and warehousing assets in Southern Spain&rsquo;s growing logistics corridor. Long-term triple-net leases providing stable, low-variance income. Ideal for investors seeking predictable returns.</div>
+          <div class="pipe-desc">Logistics and warehousing assets in Southern Spain&rsquo;s growing logistics corridor. Long-term triple-net lease structures. Income depends on occupancy and tenant performance.</div>
           <div class="pipe-timeline">Pipeline 2027</div>
+        </div>
+        <div class="proj-bottom"><a class="proj-btn btn-out" href="contact.html">Register interest</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-section reveal" data-cat="collectables">
+    <div class="cat-header">
+      <div class="cat-title">Collectables</div>
+      <span class="cat-pill badge-purple">Coming soon</span>
+      <div class="cat-desc">Vintage cars &amp; rare assets — fractional ownership of appreciating collectables.</div>
+    </div>
+    <div class="proj-grid g2">
+      <div class="proj-card">
+        <div class="pipe-card">
+          <div class="pipe-badges"><span class="badge badge-purple">Collectables</span><span class="badge badge-muted">Coming soon</span></div>
+          <div class="pipe-desc">Fractional ownership of curated vintage cars, fine art, watches, and rare assets. Value appreciation potential based on collector market dynamics. Past performance is not indicative of future results.</div>
+          <div class="pipe-timeline">Coming 2027</div>
+        </div>
+        <div class="proj-bottom"><a class="proj-btn btn-out" href="contact.html">Register interest</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-section reveal" data-cat="jets">
+    <div class="cat-header">
+      <div class="cat-title">Private Jets</div>
+      <span class="cat-pill badge-amber">Coming soon</span>
+      <div class="cat-desc">Charter yield &amp; appreciation — fractional aviation ownership.</div>
+    </div>
+    <div class="proj-grid g2">
+      <div class="proj-card">
+        <div class="pipe-card">
+          <div class="pipe-badges"><span class="badge badge-amber">Private Jets</span><span class="badge badge-muted">Coming soon</span></div>
+          <div class="pipe-desc">Fractional ownership of private aircraft with potential charter income. Revenue depends on utilisation rates and market demand. Asset values subject to depreciation and market conditions.</div>
+          <div class="pipe-timeline">Coming 2027</div>
         </div>
         <div class="proj-bottom"><a class="proj-btn btn-out" href="contact.html">Register interest</a></div>
       </div>
@@ -283,11 +321,11 @@ footer{padding:64px 52px 48px;border-top:1px solid var(--border);display:grid;gr
 </div>
 
 <footer>
-  <div><div class="ft-mark"><div class="ft-sigil">◎</div><div class="ft-name">Cavok</div></div><p class="ft-tagline">Programmable real estate capital on Flare Network.</p><div class="ft-network">Flare Network · Coston2 · Mainnet Q3 2026</div></div>
+  <div><div class="ft-mark"><div class="ft-sigil">◎</div><div class="ft-name">Cavok</div></div><p class="ft-tagline">Next-gen tokenization of real-world assets on Flare Network.</p><div class="ft-network">Flare Network · Coston2 · Mainnet Q3 2026</div></div>
   <div class="ft-col"><h4>Platform</h4><a href="index.html">Home</a><a href="technology.html">Technology</a><a href="about.html">About</a></div>
   <div class="ft-col"><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a></div>
   <div class="ft-col"><h4>Network</h4><a href="https://flare.network" target="_blank">Flare Network</a><a href="https://coston2-explorer.flare.network" target="_blank">Explorer</a></div>
-  <div class="ft-bottom"><p class="ft-legal">CAVOK tokens are profit-participating loan instruments. This website is for informational purposes only and does not constitute an offer, solicitation, or financial advice. Projected returns are illustrative estimates only and not guaranteed. Villa A and Villa B are subject to completion of land acquisition. Access to investment details requires KYC verification. Not available to US persons.</p><span class="ft-copy">&copy; 2026 CAVOK</span></div>
+  <div class="ft-bottom"><p class="ft-legal">CAVOK tokens are profit-participating loan instruments. This website is for informational purposes only and does not constitute an offer, solicitation, or financial advice. Returns are variable and not guaranteed. Past performance is not indicative of future results. Villa A and Villa B are subject to completion of land acquisition. Access to investment details requires KYC verification. Not available to US persons.</p><span class="ft-copy">&copy; 2026 CAVOK</span></div>
 </footer>
 
 <script>

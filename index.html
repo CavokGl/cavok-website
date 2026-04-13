@@ -96,20 +96,28 @@ nav.compact {
   font-size: 15px;
   letter-spacing: 6px;
   text-transform: uppercase;
-  color: var(--cream);
+  color: #d4a86a;
+}
+.nav-subtitle {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--cream3);
+  margin-left: 12px;
 }
 .nav-right {
   display: flex; align-items: center; gap: 40px;
 }
 .nav-link {
-  font-size: 10px; font-weight: 300;
+  font-size: 12px; font-weight: 300;
   letter-spacing: 2px; text-transform: uppercase;
   color: var(--cream3); text-decoration: none;
   transition: color 0.2s;
 }
 .nav-link:hover { color: var(--cream2); }
 .nav-cta {
-  font-size: 10px; font-weight: 300;
+  font-size: 12px; font-weight: 300;
   letter-spacing: 2px; text-transform: uppercase;
   color: var(--gold); text-decoration: none;
   border: 1px solid var(--border2);
@@ -201,7 +209,7 @@ nav.compact {
 }
 
 .hero-body {
-  font-size: 14px; font-weight: 300;
+  font-size: 16px; font-weight: 300;
   color: var(--cream3);
   line-height: 1.85;
   max-width: 440px;
@@ -302,7 +310,7 @@ nav.compact {
   margin-bottom: 24px;
 }
 .what-body {
-  font-size: 13px; font-weight: 300;
+  font-size: 15px; font-weight: 300;
   color: var(--cream3); line-height: 1.9;
   max-width: 360px;
 }
@@ -335,11 +343,11 @@ nav.compact {
   opacity: 0.5; min-width: 20px; margin-top: 2px;
 }
 .what-item-title {
-  font-size: 12px; font-weight: 400;
+  font-size: 15px; font-weight: 400;
   letter-spacing: 0.3px; margin-bottom: 6px;
 }
 .what-item-text {
-  font-size: 12px; font-weight: 300;
+  font-size: 14px; font-weight: 300;
   color: var(--cream3); line-height: 1.7;
 }
 
@@ -360,7 +368,7 @@ nav.compact {
   color: var(--cream); max-width: 400px;
 }
 .how-sub {
-  font-size: 12px; font-weight: 300;
+  font-size: 15px; font-weight: 300;
   color: var(--cream3); line-height: 1.8;
   max-width: 320px; text-align: right;
 }
@@ -388,11 +396,11 @@ nav.compact {
   font-size: 18px; margin-bottom: 20px; display: block;
 }
 .how-step-title {
-  font-size: 13px; font-weight: 400;
+  font-size: 15px; font-weight: 400;
   margin-bottom: 10px; letter-spacing: 0.2px;
 }
 .how-step-text {
-  font-size: 11px; font-weight: 300;
+  font-size: 14px; font-weight: 300;
   color: var(--cream3); line-height: 1.75;
 }
 
@@ -420,7 +428,7 @@ footer {
   font-size: 13px; letter-spacing: 5px; text-transform: uppercase;
 }
 .ft-tagline {
-  font-size: 11px; font-weight: 300;
+  font-size: 14px; font-weight: 300;
   color: var(--cream3); line-height: 1.8;
   max-width: 240px; margin-bottom: 24px;
 }
@@ -435,7 +443,7 @@ footer {
   color: var(--cream3); margin-bottom: 20px;
 }
 .ft-col a {
-  display: block; font-size: 12px; font-weight: 300;
+  display: block; font-size: 14px; font-weight: 300;
   color: var(--cream3); text-decoration: none;
   margin-bottom: 12px; transition: color 0.2s;
 }
@@ -507,6 +515,7 @@ footer {
   <a class="nav-mark" href="index.html">
     <div class="nav-sigil">◎</div>
     <div class="nav-wordmark">Cavok</div>
+    <span class="nav-subtitle">Next-gen tokenization</span>
   </a>
   <div class="nav-right">
     <a class="nav-link" href="projects.html">Projects</a>
@@ -532,7 +541,7 @@ footer {
       for every investor.
     </h1>
     <p class="hero-body">
-      CAVOK tokenises exceptional European real estate as profit-participating loans — delivering fractional access, three simultaneous yield streams, and full on-chain transparency from the moment you commit.
+      Next-gen tokenization of real-world assets. CAVOK structures European real estate as profit-participating loans — providing fractional access, multiple potential income streams, and full on-chain transparency.
     </p>
     <div class="hero-actions">
       <a class="btn-gold" href="projects.html">Explore Projects</a>
@@ -567,7 +576,7 @@ footer {
     <div class="what-num">01 — What We Do</div>
     <h2 class="what-title">Capital that works<br>before the first<br>brick is laid.</h2>
     <p class="what-body">
-      Most real estate investments lock your capital away while construction drags on. CAVOK deploys 79% of committed capital into yield instruments from day one — so investors earn while the project builds.
+      Most real estate investments lock your capital away while construction progresses. CAVOK deploys committed capital into DeFi vaults during the build phase — so your position may generate returns before the property is completed.
     </p>
     <a class="what-link" href="technology.html">How it works</a>
   </div>
@@ -575,22 +584,22 @@ footer {
     <div class="what-item">
       <div class="what-item-num">I</div>
       <div>
-        <div class="what-item-title">Vault yield — active immediately</div>
-        <div class="what-item-text">Idle capital earns 12.4% APY in DeFi vaults from the day funds are committed. Distributed monthly to token holders throughout the project lifecycle.</div>
+        <div class="what-item-title">Vault yield — active from day one</div>
+        <div class="what-item-text">Idle capital is deployed into DeFi vaults from the day funds are committed. Vault returns are variable and depend on market conditions. Distributed to token holders throughout the project lifecycle.</div>
       </div>
     </div>
     <div class="what-item">
       <div class="what-item-num">II</div>
       <div>
         <div class="what-item-title">Rental income — conditional interest</div>
-        <div class="what-item-text">Upon completion, rental income flows on-chain monthly as conditional interest on your loan position. Legally structured outside MiFID II securities scope.</div>
+        <div class="what-item-text">Upon completion, rental income may flow on-chain as conditional interest on your loan position. Returns depend on occupancy and market conditions. Structured as profit-participating loans.</div>
       </div>
     </div>
     <div class="what-item">
       <div class="what-item-num">III</div>
       <div>
-        <div class="what-item-title">Exit gain — pro-rata appreciation</div>
-        <div class="what-item-text">Your share of property value growth at sale. Partial exits supported — redeem any number of tokens. Monte Mayor target: 5,500,000 USDT0 at Month 48.</div>
+        <div class="what-item-title">Exit — pro-rata distribution</div>
+        <div class="what-item-text">Your share of proceeds at property sale. Partial exits supported — redeem any number of tokens. Exit values depend on market conditions and are not guaranteed.</div>
       </div>
     </div>
   </div>
@@ -599,9 +608,9 @@ footer {
 <!-- HOW IT WORKS -->
 <section class="how">
   <div class="how-head reveal">
-    <h2 class="how-title">From wallet<br>to yield in<br>four steps.</h2>
+    <h2 class="how-title">From wallet<br>to position in<br>four steps.</h2>
     <p class="how-sub">
-      CAVOK handles the complexity of real estate investment on-chain. Connect, choose, commit — then watch your capital work.
+      CAVOK handles the complexity of real estate investment on-chain. Connect, choose, commit — and track your position transparently.
     </p>
   </div>
   <div class="how-grid reveal">
@@ -615,7 +624,7 @@ footer {
       <div class="how-step-n">2</div>
       <span class="how-step-icon">⬡</span>
       <div class="how-step-title">Choose a project</div>
-      <div class="how-step-text">Browse live SPVs with real-time data from Flare Network. Each project shows target return, build progress, and current yield.</div>
+      <div class="how-step-text">Browse live SPVs with real-time data from Flare Network. Each project shows build progress, vault status, and key project metrics.</div>
     </div>
     <div class="how-step">
       <div class="how-step-n">3</div>
@@ -626,8 +635,8 @@ footer {
     <div class="how-step">
       <div class="how-step-n">4</div>
       <span class="how-step-icon">⟳</span>
-      <div class="how-step-title">Earn on-chain</div>
-      <div class="how-step-text">Vault yield begins immediately. Claim to wallet, compound via the secondary market, or enable auto-compound with a configurable threshold.</div>
+      <div class="how-step-title">Track on-chain</div>
+      <div class="how-step-text">Vault positions begin immediately. Claim to wallet, compound via the secondary market, or enable auto-compound with a configurable threshold.</div>
     </div>
   </div>
 </section>
@@ -639,7 +648,7 @@ footer {
       <div class="ft-sigil">◎</div>
       <div class="ft-name">Cavok</div>
     </div>
-    <p class="ft-tagline">Programmable real estate capital on Flare Network. Three yield streams. Full transparency.</p>
+    <p class="ft-tagline">Next-gen tokenization of real-world assets on Flare Network. Full on-chain transparency.</p>
     <div class="ft-network">Flare Network · Coston2 Testnet · Mainnet Q3 2026</div>
   </div>
 
@@ -665,7 +674,7 @@ footer {
   </div>
 
   <div class="ft-bottom">
-    <p class="ft-legal">CAVOK tokens are profit-participating loan instruments and are not classified as securities under MiFID II in most EU jurisdictions. This website is for informational purposes only and does not constitute an offer or solicitation to purchase securities. Consult legal counsel before investing.</p>
+    <p class="ft-legal">CAVOK tokens are profit-participating loan instruments and are not classified as transferable securities under MiFID II. This website is for informational purposes only and does not constitute an offer, solicitation, or recommendation. Past performance is not indicative of future results. Returns are variable and not guaranteed. Consult legal and financial counsel before participating.</p>
     <span class="ft-copy">© 2026 CAVOK</span>
   </div>
 </footer>
