@@ -404,6 +404,105 @@ nav.compact {
   color: var(--cream3); line-height: 1.75;
 }
 
+/* ── SECTION: TRACK RECORD ──────────────────────────── */
+.track {
+  padding: 120px 52px;
+  background: var(--ink2);
+  border-top: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.track::before {
+  content: '';
+  position: absolute;
+  right: -120px; top: 50%;
+  transform: translateY(-50%);
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  opacity: 0.3;
+}
+.track-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+}
+.track-left { }
+.track-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; font-weight: 300;
+  color: var(--gold); letter-spacing: 3px;
+  margin-bottom: 24px;
+}
+.track-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 300; line-height: 1.15;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+.track-sub {
+  font-size: 16px; font-weight: 300;
+  color: var(--cream3); line-height: 1.8;
+  margin-bottom: 32px;
+}
+.track-stat {
+  display: flex; align-items: baseline; gap: 16px;
+  margin-bottom: 28px;
+}
+.track-stat-v {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px; font-weight: 300;
+  color: var(--gold); line-height: 1;
+}
+.track-stat-l {
+  font-size: 14px; font-weight: 300;
+  color: var(--cream3);
+}
+.track-body {
+  font-size: 15px; font-weight: 300;
+  color: var(--cream3); line-height: 1.85;
+  max-width: 480px;
+}
+.track-right {
+  display: flex; flex-direction: column; gap: 0;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.track-tl {
+  background: var(--ink2);
+  padding: 20px 28px;
+  display: flex; gap: 20px; align-items: flex-start;
+  transition: background 0.2s;
+}
+.track-tl:hover { background: var(--ink3); }
+.track-tl-year {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-weight: 300;
+  color: var(--gold); min-width: 44px;
+  margin-top: 1px;
+}
+.track-tl-text {
+  font-size: 14px; font-weight: 300;
+  color: var(--cream); line-height: 1.6;
+}
+.track-tl-sub {
+  font-size: 12px; color: var(--cream3); margin-top: 2px;
+}
+.track-disc {
+  font-size: 11px; font-weight: 300;
+  color: rgba(232,224,208,0.3);
+  margin-top: 24px;
+  font-style: italic;
+}
+
+@media (max-width: 900px) {
+  .track { padding: 80px 24px; }
+  .track-inner { grid-template-columns: 1fr; gap: 48px; }
+}
+
 /* ── SECTION: FOOTER ────────────────────────────────── */
 footer {
   padding: 64px 52px 48px;
@@ -637,6 +736,55 @@ footer {
       <span class="how-step-icon">⟳</span>
       <div class="how-step-title">Track on-chain</div>
       <div class="how-step-text">Vault positions begin immediately. Claim to wallet, compound via the secondary market, or enable auto-compound with a configurable threshold.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACK RECORD -->
+<section class="track">
+  <div class="track-inner">
+    <div class="track-left reveal">
+      <div class="track-num">03 — Track Record</div>
+      <h2 class="track-title">Proven track record</h2>
+      <p class="track-sub">Before building the platform, we built the proof.</p>
+      <div class="track-stat">
+        <div class="track-stat-v">+53%</div>
+        <div class="track-stat-l">ROI over 2 years<br>Marbella, Costa del Sol</div>
+      </div>
+      <p class="track-body">
+        The Para&iacute;so development in Marbella delivered 53% return over a 2-year hold period &mdash; and taught us exactly what a tokenized real estate platform needed to get right.
+      </p>
+      <p class="track-disc">Past performance does not guarantee future results.</p>
+    </div>
+    <div class="track-right reveal">
+      <div class="track-tl">
+        <div class="track-tl-year">2022</div>
+        <div>
+          <div class="track-tl-text">Para&iacute;so acquired</div>
+          <div class="track-tl-sub">Marbella, Costa del Sol</div>
+        </div>
+      </div>
+      <div class="track-tl">
+        <div class="track-tl-year">2024</div>
+        <div>
+          <div class="track-tl-text">Exited at +53% ROI</div>
+          <div class="track-tl-sub">Proof of concept validated</div>
+        </div>
+      </div>
+      <div class="track-tl">
+        <div class="track-tl-year">2024</div>
+        <div>
+          <div class="track-tl-text">CAVOK platform development begins</div>
+          <div class="track-tl-sub">Smart contracts, dApp, investor flow</div>
+        </div>
+      </div>
+      <div class="track-tl">
+        <div class="track-tl-year">2026</div>
+        <div>
+          <div class="track-tl-text">Villa A + B &middot; First tokenized SPVs</div>
+          <div class="track-tl-sub">Live on Flare Network</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
