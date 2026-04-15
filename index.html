@@ -3,605 +3,416 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CAVOK</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<title>CAVOK Global — Real Estate Tokenization</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-:root {
-  --ink:     #0a0d12;
-  --ink2:    #111620;
-  --ink3:    #181f2e;
-  --gold:    #b8955a;
-  --gold2:   #d4b07a;
-  --cream:   #e8e0d0;
-  --cream2:  rgba(232,224,208,0.82);
-  --cream3:  rgba(232,224,208,0.58);
-  --border:  rgba(184,149,90,0.1);
-  --border2: rgba(184,149,90,0.22);
-}
+  :root {
+    --gold: #d4a86a;
+    --gold-dim: rgba(212,168,106,0.4);
+    --gold-faint: rgba(212,168,106,0.08);
+    --cream: #f5efe3;
+    --cream-dim: rgba(245,239,227,0.75);
+    --cream-faint: rgba(245,239,227,0.25);
+    --bg: #06080e;
+    --bg-card: #0d1117;
+    --bg-card2: #111820;
+    --dim: rgba(245,239,227,0.6);
+  }
 
-html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; }
 
-body {
-  font-family: 'Jost', sans-serif;
-  background: var(--ink);
-  color: var(--cream);
-  overflow-x: hidden;
-  cursor: none;
-}
+  body {
+    background: var(--bg);
+    color: var(--cream-dim);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    cursor: none;
+  }
 
-/* ── CUSTOM CURSOR ─────────────────────────────────── */
-#cursor {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--gold);
-  position: fixed; top: 0; left: 0;
-  pointer-events: none; z-index: 9999;
-  transition: transform 0.15s ease, opacity 0.15s ease;
-  transform: translate(-50%, -50%);
-}
-#cursor-ring {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  border: 1px solid rgba(184,149,90,0.4);
-  position: fixed; top: 0; left: 0;
-  pointer-events: none; z-index: 9998;
-  transition: transform 0.35s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
-  transform: translate(-50%, -50%);
-}
-a:hover ~ #cursor, button:hover ~ #cursor { transform: translate(-50%,-50%) scale(2); }
+  /* ── CUSTOM CURSOR ── */
+  #cursor {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+    transform: translate(-50%, -50%);
+  }
+  #cursor-ring {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,168,106,0.4);
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transition: transform 0.35s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+    transform: translate(-50%, -50%);
+  }
 
-/* ── GRAIN OVERLAY ─────────────────────────────────── */
-body::before {
-  content: '';
-  position: fixed; inset: 0; z-index: 1000;
-  pointer-events: none;
-  opacity: 0.028;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 128px;
-}
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 1000;
+    pointer-events: none;
+    opacity: 0.028;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 128px;
+  }
 
-/* ── NAV ───────────────────────────────────────────── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 32px 52px;
-  display: flex; align-items: center; justify-content: space-between;
-  transition: padding 0.4s ease, background 0.4s ease;
-}
-nav.compact {
-  padding: 20px 52px;
-  background: rgba(10,13,18,0.92);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-}
-.nav-mark {
-  display: flex; align-items: center; gap: 14px;
-  text-decoration: none;
-}
-.nav-sigil {
-  width: 30px; height: 30px;
-  border: 1px solid var(--gold);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 11px; color: var(--gold);
-  transition: all 0.25s ease;
-}
-.nav-mark:hover .nav-sigil { background: var(--gold); color: var(--ink); }
-.nav-wordmark {
-  font-family: 'Jost', sans-serif;
-  font-weight: 200;
-  font-size: 15px;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: #d4a86a;
-}
-.nav-subtitle {
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 11px;
-  letter-spacing: 1px;
-  color: var(--cream3);
-  margin-left: 12px;
-}
-.nav-right {
-  display: flex; align-items: center; gap: 40px;
-}
-.nav-link {
-  font-size: 12px; font-weight: 300;
-  letter-spacing: 2px; text-transform: uppercase;
-  color: var(--cream3); text-decoration: none;
-  transition: color 0.2s;
-}
-.nav-link:hover { color: var(--cream2); }
-.nav-cta {
-  font-size: 12px; font-weight: 300;
-  letter-spacing: 2px; text-transform: uppercase;
-  color: var(--gold); text-decoration: none;
-  border: 1px solid var(--border2);
-  padding: 10px 24px;
-  transition: all 0.25s ease;
-  background: transparent;
-  cursor: none;
-}
-.nav-cta:hover {
-  background: var(--gold);
-  color: var(--ink);
-  border-color: var(--gold);
-}
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 48px;
+    border-bottom: 0.5px solid transparent;
+    background: transparent;
+    backdrop-filter: none;
+    transition: padding 0.35s ease, background 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease;
+  }
+  nav.compact {
+    padding: 16px 48px;
+    border-bottom: 0.5px solid var(--gold-dim);
+    background: rgba(6,8,14,0.92);
+    backdrop-filter: blur(12px);
+  }
 
-/* ── HERO ──────────────────────────────────────────── */
-.hero {
-  min-height: 100vh;
-  display: flex; flex-direction: column;
-  justify-content: center; align-items: flex-start;
-  padding: 0 52px 0 52px;
-  position: relative; overflow: hidden;
-}
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: none; }
 
-/* Subtle geometric background */
-.hero-geo {
-  position: absolute; inset: 0; pointer-events: none;
-  overflow: hidden;
-}
-.hero-geo::before {
-  content: '';
-  position: absolute;
-  right: -180px; top: 50%;
-  transform: translateY(-50%);
-  width: 680px; height: 680px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  opacity: 0.6;
-}
-.hero-geo::after {
-  content: '';
-  position: absolute;
-  right: -80px; top: 50%;
-  transform: translateY(-50%);
-  width: 440px; height: 440px;
-  border-radius: 50%;
-  border: 1px solid var(--border2);
-  opacity: 0.4;
-}
-.hero-dot {
-  position: absolute;
-  right: 200px; top: 50%;
-  transform: translateY(-50%);
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: var(--gold);
-  opacity: 0.7;
-}
+  .logo-mark {
+    width: 34px; height: 34px; position: relative; flex-shrink: 0;
+  }
+  .logo-mark svg { width: 100%; height: 100%; }
 
-.hero-content { max-width: 680px; position: relative; }
+  .nav-brand { display: flex; flex-direction: column; gap: 1px; }
+  .nav-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; letter-spacing: 5px; color: var(--cream);
+    font-weight: 300; text-transform: uppercase; line-height: 1;
+  }
+  .nav-sub {
+    font-family: 'Jost', sans-serif;
+    font-size: 8px; letter-spacing: 2.5px; color: var(--gold);
+    text-transform: uppercase; opacity: 0.6;
+  }
 
-.hero-label {
-  display: flex; align-items: center; gap: 14px;
-  margin-bottom: 52px;
-  opacity: 0; animation: fadeUp 0.9s 0.2s forwards;
-}
-.hero-label-line {
-  width: 32px; height: 1px; background: var(--gold); opacity: 0.5;
-}
-.hero-label-text {
-  font-size: 9px; font-weight: 300;
-  letter-spacing: 3px; text-transform: uppercase;
-  color: var(--cream3);
-}
+  .nav-links { display: flex; align-items: center; gap: 36px; }
+  .nav-links a {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--dim); text-decoration: none; transition: color 0.2s;
+    cursor: none;
+  }
+  .nav-links a:hover { color: var(--gold); }
 
-.hero-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  font-size: clamp(46px, 6.5vw, 82px);
-  line-height: 1.08;
-  letter-spacing: -0.5px;
-  color: var(--cream);
-  margin-bottom: 32px;
-  opacity: 0; animation: fadeUp 0.9s 0.4s forwards;
-}
-.hero-title em {
-  font-style: italic;
-  color: var(--gold);
-  opacity: 0.9;
-}
+  .nav-cta {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    border: 0.5px solid var(--gold-dim); color: var(--gold) !important;
+    padding: 8px 20px; border-radius: 2px; transition: all 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold-faint) !important; border-color: var(--gold) !important; }
 
-.hero-body {
-  font-size: 16px; font-weight: 300;
-  color: var(--cream3);
-  line-height: 1.85;
-  max-width: 440px;
-  margin-bottom: 52px;
-  opacity: 0; animation: fadeUp 0.9s 0.6s forwards;
-}
+  /* ── SECTIONS ── */
+  section { padding: 120px 48px; border-bottom: 0.5px solid rgba(212,168,106,0.07); }
+  .container { max-width: 1100px; margin: 0 auto; }
 
-.hero-actions {
-  display: flex; gap: 16px;
-  opacity: 0; animation: fadeUp 0.9s 0.8s forwards;
-}
-.btn-ghost {
-  font-size: 10px; font-weight: 300;
-  letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--cream2); text-decoration: none;
-  padding: 14px 32px;
-  border: 1px solid rgba(232,224,208,0.15);
-  transition: all 0.25s ease;
-  cursor: none;
-}
-.btn-ghost:hover {
-  border-color: rgba(232,224,208,0.35);
-  color: var(--cream);
-}
-.btn-gold {
-  font-size: 10px; font-weight: 300;
-  letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--ink); text-decoration: none;
-  padding: 14px 32px;
-  background: var(--gold);
-  border: 1px solid var(--gold);
-  transition: all 0.25s ease;
-  cursor: none;
-}
-.btn-gold:hover { background: var(--gold2); border-color: var(--gold2); }
+  .eyebrow {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); opacity: 0.7; margin-bottom: 20px;
+    font-family: 'Jost', sans-serif;
+  }
 
-/* Scroll indicator */
-.hero-scroll {
-  position: absolute; bottom: 40px; left: 52px;
-  display: flex; align-items: center; gap: 12px;
-  opacity: 0; animation: fadeUp 0.9s 1.1s forwards;
-}
-.scroll-bar {
-  width: 1px; height: 48px;
-  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-  animation: scrollpulse 2.5s ease-in-out infinite;
-}
-@keyframes scrollpulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.8; }
-}
-.scroll-label {
-  font-size: 8px; font-weight: 300;
-  letter-spacing: 3px; text-transform: uppercase;
-  color: var(--cream3);
-  writing-mode: vertical-rl;
-}
+  h1, h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300; color: var(--cream); line-height: 1.15;
+  }
 
-/* Stats row */
-.hero-stats {
-  position: absolute; bottom: 40px; right: 52px;
-  display: flex; gap: 48px;
-  opacity: 0; animation: fadeUp 0.9s 1.0s forwards;
-}
-.hstat { text-align: right; }
-.hstat-v {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px; font-weight: 300;
-  color: var(--cream);
-}
-.hstat-l {
-  font-size: 9px; font-weight: 300;
-  letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--cream3); margin-top: 4px;
-}
+  h1 { font-size: clamp(44px, 6vw, 68px); }
+  h2 { font-size: clamp(32px, 4vw, 48px); }
 
-/* ── SECTION: WHAT ─────────────────────────────────── */
-.what {
-  padding: 120px 52px;
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 80px;
-  align-items: center;
-  border-top: 1px solid var(--border);
-}
-.what-left { }
-.what-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 11px; font-weight: 300;
-  color: var(--gold); letter-spacing: 3px;
-  margin-bottom: 24px;
-}
-.what-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 4vw, 50px);
-  font-weight: 300; line-height: 1.15;
-  color: var(--cream);
-  margin-bottom: 24px;
-}
-.what-body {
-  font-size: 15px; font-weight: 300;
-  color: var(--cream3); line-height: 1.9;
-  max-width: 360px;
-}
-.what-link {
-  display: inline-flex; align-items: center; gap: 10px;
-  margin-top: 32px;
-  font-size: 10px; font-weight: 300;
-  letter-spacing: 2px; text-transform: uppercase;
-  color: var(--gold); text-decoration: none;
-  transition: gap 0.2s ease;
-}
-.what-link:hover { gap: 16px; }
-.what-link::after { content: '→'; }
+  em { color: var(--gold); font-style: italic; }
 
-.what-right {
-  display: flex; flex-direction: column; gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-}
-.what-item {
-  background: var(--ink2);
-  padding: 28px 32px;
-  display: flex; gap: 20px; align-items: flex-start;
-  transition: background 0.2s;
-}
-.what-item:hover { background: var(--ink3); }
-.what-item-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 13px; color: var(--gold);
-  opacity: 0.5; min-width: 20px; margin-top: 2px;
-}
-.what-item-title {
-  font-size: 15px; font-weight: 400;
-  letter-spacing: 0.3px; margin-bottom: 6px;
-}
-.what-item-text {
-  font-size: 14px; font-weight: 300;
-  color: var(--cream3); line-height: 1.7;
-}
+  .rule {
+    width: 52px; height: 0.5px; background: var(--gold);
+    margin: 28px 0; opacity: 0.6;
+  }
 
-/* ── SECTION: HOW ──────────────────────────────────── */
-.how {
-  padding: 120px 52px;
-  background: var(--ink2);
-  border-top: 1px solid var(--border);
-}
-.how-head {
-  display: flex; justify-content: space-between; align-items: flex-end;
-  margin-bottom: 72px;
-}
-.how-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 4vw, 50px);
-  font-weight: 300; line-height: 1.15;
-  color: var(--cream); max-width: 400px;
-}
-.how-sub {
-  font-size: 15px; font-weight: 300;
-  color: var(--cream3); line-height: 1.8;
-  max-width: 320px; text-align: right;
-}
-.how-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px; background: var(--border);
-  border: 1px solid var(--border);
-}
-.how-step {
-  background: var(--ink2);
-  padding: 40px 28px 36px;
-  position: relative;
-  transition: background 0.2s;
-}
-.how-step:hover { background: var(--ink3); }
-.how-step-n {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 64px; font-weight: 300;
-  color: var(--gold); opacity: 0.08;
-  position: absolute; top: 16px; right: 20px;
-  line-height: 1;
-}
-.how-step-icon {
-  font-size: 18px; margin-bottom: 20px; display: block;
-}
-.how-step-title {
-  font-size: 15px; font-weight: 400;
-  margin-bottom: 10px; letter-spacing: 0.2px;
-}
-.how-step-text {
-  font-size: 14px; font-weight: 300;
-  color: var(--cream3); line-height: 1.75;
-}
+  p { font-size: 15px; color: var(--cream-dim); line-height: 1.85; }
 
-/* ── SECTION: TRACK RECORD ──────────────────────────── */
-.track {
-  padding: 120px 52px;
-  background: var(--ink2);
-  border-top: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
-}
-.track::before {
-  content: '';
-  position: absolute;
-  right: -120px; top: 50%;
-  transform: translateY(-50%);
-  width: 500px; height: 500px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  opacity: 0.3;
-}
-.track-inner {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 80px;
-  align-items: center;
-  position: relative;
-}
-.track-left { }
-.track-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 11px; font-weight: 300;
-  color: var(--gold); letter-spacing: 3px;
-  margin-bottom: 24px;
-}
-.track-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 4vw, 50px);
-  font-weight: 300; line-height: 1.15;
-  color: var(--cream);
-  margin-bottom: 12px;
-}
-.track-sub {
-  font-size: 16px; font-weight: 300;
-  color: var(--cream3); line-height: 1.8;
-  margin-bottom: 32px;
-}
-.track-stat {
-  display: flex; align-items: baseline; gap: 16px;
-  margin-bottom: 28px;
-}
-.track-stat-v {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 72px; font-weight: 300;
-  color: var(--gold); line-height: 1;
-}
-.track-stat-l {
-  font-size: 14px; font-weight: 300;
-  color: var(--cream3);
-}
-.track-body {
-  font-size: 15px; font-weight: 300;
-  color: var(--cream3); line-height: 1.85;
-  max-width: 480px;
-}
-.track-right {
-  display: flex; flex-direction: column; gap: 0;
-  background: var(--border);
-  border: 1px solid var(--border);
-}
-.track-tl {
-  background: var(--ink2);
-  padding: 20px 28px;
-  display: flex; gap: 20px; align-items: flex-start;
-  transition: background 0.2s;
-}
-.track-tl:hover { background: var(--ink3); }
-.track-tl-year {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 16px; font-weight: 300;
-  color: var(--gold); min-width: 44px;
-  margin-top: 1px;
-}
-.track-tl-text {
-  font-size: 14px; font-weight: 300;
-  color: var(--cream); line-height: 1.6;
-}
-.track-tl-sub {
-  font-size: 12px; color: var(--cream3); margin-top: 2px;
-}
-.track-disc {
-  font-size: 11px; font-weight: 300;
-  color: rgba(232,224,208,0.3);
-  margin-top: 24px;
-  font-style: italic;
-}
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding-top: 120px;
+    position: relative; overflow: hidden;
+  }
 
-@media (max-width: 900px) {
-  .track { padding: 80px 24px; }
-  .track-inner { grid-template-columns: 1fr; gap: 48px; }
-}
+  .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
 
-/* ── SECTION: FOOTER ────────────────────────────────── */
-footer {
-  padding: 64px 52px 48px;
-  border-top: 1px solid var(--border);
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 48px;
-}
-.ft-brand { }
-.ft-mark {
-  display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
-}
-.ft-sigil {
-  width: 26px; height: 26px; border-radius: 50%;
-  border: 1px solid var(--gold);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 10px; color: var(--gold);
-}
-.ft-name {
-  font-family: 'Jost', sans-serif; font-weight: 200;
-  font-size: 13px; letter-spacing: 5px; text-transform: uppercase;
-}
-.ft-tagline {
-  font-size: 14px; font-weight: 300;
-  color: var(--cream3); line-height: 1.8;
-  max-width: 240px; margin-bottom: 24px;
-}
-.ft-network {
-  font-size: 9px; font-weight: 300;
-  letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--gold); opacity: 0.6;
-}
-.ft-col h4 {
-  font-size: 9px; font-weight: 300;
-  letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--cream3); margin-bottom: 20px;
-}
-.ft-col a {
-  display: block; font-size: 14px; font-weight: 300;
-  color: var(--cream3); text-decoration: none;
-  margin-bottom: 12px; transition: color 0.2s;
-}
-.ft-col a:hover { color: var(--cream); }
-.ft-bottom {
-  grid-column: 1 / -1;
-  padding-top: 32px;
-  border-top: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: center;
-}
-.ft-legal {
-  font-size: 9px; font-weight: 300;
-  color: rgba(232,224,208,0.18); line-height: 1.7;
-  max-width: 560px;
-}
-.ft-copy {
-  font-size: 9px; font-weight: 300;
-  letter-spacing: 1px; color: rgba(232,224,208,0.25);
-  white-space: nowrap;
-}
+  .hero-tag {
+    display: inline-block; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold); opacity: 0.6;
+    border: 0.5px solid var(--gold-dim); padding: 5px 14px;
+    border-radius: 2px; margin-bottom: 48px;
+  }
 
-/* ── ANIMATIONS ─────────────────────────────────────── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.reveal {
-  opacity: 0; transform: translateY(16px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.in { opacity: 1; transform: translateY(0); }
+  .hero-h1 { max-width: 820px; margin-bottom: 12px; }
 
-/* ── RESPONSIVE ─────────────────────────────────────── */
-@media (max-width: 900px) {
-  body { cursor: auto; }
-  #cursor, #cursor-ring { display: none; }
-  nav { padding: 24px 24px; }
-  nav.compact { padding: 16px 24px; }
-  .nav-right { gap: 20px; }
-  .nav-link { display: none; }
-  .hero { padding: 0 24px; }
-  .hero-stats { display: none; }
-  .hero-scroll { left: 24px; }
-  .what { grid-template-columns: 1fr; gap: 48px; padding: 80px 24px; }
-  .what-body { max-width: 100%; }
-  .how { padding: 80px 24px; }
-  .how-head { flex-direction: column; gap: 20px; align-items: flex-start; }
-  .how-sub { text-align: left; }
-  .how-grid { grid-template-columns: 1fr 1fr; }
-  footer { grid-template-columns: 1fr 1fr; padding: 48px 24px 36px; gap: 32px; }
-  .ft-brand { grid-column: 1 / -1; }
-  .ft-bottom { flex-direction: column; gap: 16px; align-items: flex-start; }
-}
-@media (max-width: 560px) {
-  .how-grid { grid-template-columns: 1fr; }
-  .hero-title { font-size: 40px; }
-  .hero-actions { flex-direction: column; }
-  footer { grid-template-columns: 1fr; }
-}
+  .hero-sub {
+    font-size: 16px; color: var(--dim); max-width: 580px;
+    line-height: 1.8; margin-top: 28px;
+  }
+
+  .hero-actions { display: flex; gap: 16px; margin-top: 48px; flex-wrap: wrap; }
+
+  .btn-primary {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    background: var(--gold); color: #06080e; padding: 14px 32px;
+    text-decoration: none; font-weight: 500;
+    transition: opacity 0.2s; display: inline-block;
+    cursor: none;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+
+  .btn-secondary {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    border: 0.5px solid var(--gold-dim); color: var(--gold);
+    padding: 14px 32px; text-decoration: none;
+    transition: all 0.2s; display: inline-block;
+    cursor: none;
+  }
+  .btn-secondary:hover { background: var(--gold-faint); border-color: var(--gold); }
+
+  /* corner decoration */
+  .hero-corner {
+    position: absolute; right: 48px; top: 50%;
+    transform: translateY(-50%);
+    width: 320px; height: 320px; opacity: 0.06;
+    pointer-events: none;
+  }
+
+  /* ── TWO-COL ── */
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start;
+  }
+
+  /* ── STEP LIST ── */
+  .step-list { display: flex; flex-direction: column; gap: 1px; margin-top: 40px; }
+
+  .step {
+    display: flex; gap: 20px; align-items: flex-start;
+    background: var(--bg-card); padding: 20px 24px;
+    border-left: 0.5px solid rgba(212,168,106,0.15);
+    transition: border-color 0.2s;
+  }
+  .step:hover { border-left-color: var(--gold); }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; color: var(--gold); opacity: 0.7;
+    width: 28px; flex-shrink: 0; line-height: 1; padding-top: 2px;
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; color: var(--cream); font-weight: 300;
+    margin-bottom: 4px;
+  }
+  .step-body { font-size: 13px; color: var(--dim); line-height: 1.65; }
+
+  /* ── FLOW ── */
+  .flow {
+    display: flex; align-items: stretch; gap: 0;
+    margin-top: 48px; flex-wrap: wrap;
+  }
+  .flow-step {
+    flex: 1; min-width: 140px; text-align: center;
+    padding: 24px 16px;
+    background: var(--bg-card);
+    border-right: 0.5px solid rgba(212,168,106,0.1);
+    position: relative;
+  }
+  .flow-step:last-child { border-right: none; }
+  .flow-num {
+    font-size: 9px; letter-spacing: 2px; color: var(--gold);
+    text-transform: uppercase; opacity: 0.6; margin-bottom: 10px;
+  }
+  .flow-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; color: var(--gold); font-weight: 300; margin-bottom: 8px;
+  }
+  .flow-desc { font-size: 11px; color: var(--dim); line-height: 1.6; }
+
+  /* ── TECH GRID ── */
+  .tech-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; margin-top: 48px;
+    border: 0.5px solid rgba(212,168,106,0.1); border-radius: 4px; overflow: hidden;
+  }
+
+  .tech-card {
+    background: var(--bg-card); padding: 24px 20px;
+    transition: background 0.2s;
+  }
+  .tech-card:hover { background: var(--bg-card2); }
+  .tech-name {
+    font-size: 13px; color: var(--gold); letter-spacing: 1px;
+    margin-bottom: 8px; font-weight: 400;
+  }
+  .tech-role { font-size: 12px; color: var(--dim); line-height: 1.6; }
+
+  /* ── COMPLIANCE LIST ── */
+  .compliance-list { display: flex; flex-direction: column; gap: 0; }
+  .compliance-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 18px 0; border-bottom: 0.5px solid rgba(212,168,106,0.07);
+  }
+  .compliance-item:last-child { border-bottom: none; }
+  .ci-check {
+    font-size: 11px; color: var(--gold); width: 18px; flex-shrink: 0;
+    padding-top: 3px;
+  }
+  .ci-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; color: var(--cream); font-weight: 300;
+    margin-bottom: 3px;
+  }
+  .ci-body { font-size: 12px; color: var(--dim); line-height: 1.6; }
+
+  /* ── SECTION: TRACK RECORD ── */
+  #track {
+    padding: 120px 48px;
+    background: var(--bg-card);
+    border-top: 0.5px solid rgba(212,168,106,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  #track::before {
+    content: '';
+    position: absolute;
+    right: -120px; top: 50%;
+    transform: translateY(-50%);
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 0.5px solid var(--gold-dim);
+    opacity: 0.2;
+  }
+  .track-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .track-stat {
+    display: flex; align-items: baseline; gap: 16px;
+    margin: 28px 0;
+  }
+  .track-stat-v {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px; font-weight: 300;
+    color: var(--gold); line-height: 1;
+  }
+  .track-stat-l {
+    font-size: 14px; font-weight: 300;
+    color: var(--dim);
+  }
+  .track-disc {
+    font-size: 11px; font-weight: 300;
+    color: var(--cream-faint);
+    margin-top: 24px;
+    font-style: italic;
+  }
+  .track-right {
+    display: flex; flex-direction: column; gap: 1px;
+    background: rgba(212,168,106,0.1);
+    border: 0.5px solid rgba(212,168,106,0.1);
+  }
+  .track-tl {
+    background: var(--bg-card);
+    padding: 20px 28px;
+    display: flex; gap: 20px; align-items: flex-start;
+    transition: background 0.2s;
+  }
+  .track-tl:hover { background: var(--bg-card2); }
+  .track-tl-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-weight: 300;
+    color: var(--gold); min-width: 44px;
+    margin-top: 1px;
+  }
+  .track-tl-text {
+    font-size: 14px; font-weight: 300;
+    color: var(--cream); line-height: 1.6;
+  }
+  .track-tl-sub {
+    font-size: 12px; color: var(--dim); margin-top: 2px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 48px;
+    border-top: 0.5px solid rgba(212,168,106,0.12);
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 40px; flex-wrap: wrap;
+  }
+  .footer-logo { opacity: 0.7; }
+  .footer-disclaimer {
+    font-size: 10px; color: var(--dim); line-height: 1.7;
+    max-width: 600px; opacity: 0.8;
+  }
+  .footer-copy {
+    font-size: 10px; color: var(--dim); opacity: 0.4;
+    margin-top: 12px; letter-spacing: 0.5px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up {
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
+  }
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.3s; }
+  .delay-3 { animation-delay: 0.45s; }
+  .delay-4 { animation-delay: 0.6s; }
+
+  .reveal {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    body { cursor: auto; }
+    #cursor, #cursor-ring { display: none; }
+    .nav-logo, .nav-links a, .btn-primary, .btn-secondary { cursor: pointer; }
+    .track-inner { grid-template-columns: 1fr; gap: 48px; }
+    #track { padding: 80px 24px; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    nav.compact { padding: 14px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .two-col { grid-template-columns: 1fr; gap: 40px; }
+    .tech-grid { grid-template-columns: 1fr 1fr; }
+    .hero-corner { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -611,150 +422,202 @@ footer {
 
 <!-- NAV -->
 <nav id="nav">
-  <a class="nav-mark" href="index.html">
-    <div class="nav-sigil">◎</div>
-    <div class="nav-wordmark">Cavok</div>
-    <span class="nav-subtitle">Next-gen tokenization</span>
+  <a class="nav-logo" href="#">
+    <div class="logo-mark">
+      <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="17" cy="17" r="16" stroke="#d4a86a" stroke-width="1.2"/>
+        <circle cx="17" cy="17" r="8.5" stroke="#d4a86a" stroke-width="1"/>
+        <circle cx="17" cy="17" r="2.5" fill="#d4a86a"/>
+      </svg>
+    </div>
+    <div class="nav-brand">
+      <span class="nav-name">CAVOK Global</span>
+      <span class="nav-sub">Next-gen tokenization · Flare Network</span>
+    </div>
   </a>
-  <div class="nav-right">
-    <a class="nav-link" href="projects.html">Projects</a>
-    <a class="nav-link" href="technology.html">Technology</a>
-    <a class="nav-link" href="about.html">About</a>
-    <button class="nav-cta" onclick="document.getElementById('access-modal').style.display='flex'">Request Access</button>
+  <div class="nav-links">
+    <a href="#what">What is CAVOK</a>
+    <a href="#how">How it works</a>
+    <a href="#tech">Technology</a>
+    <a href="#track">Track record</a>
+    <a href="#structure">Structure</a>
+    <a href="https://cavok-dapp.vercel.app" class="nav-cta">dApp →</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-geo"></div>
-  <div class="hero-dot"></div>
-
-  <div class="hero-content">
-    <div class="hero-label">
-      <div class="hero-label-line"></div>
-      <div class="hero-label-text">Flare Network · Real Estate · On-Chain</div>
-    </div>
-    <h1 class="hero-title">
-      Premium property.<br>
-      <em>Reimagined</em><br>
-      for every investor.
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag fade-up">Information portal</div>
+    <h1 class="hero-h1 fade-up delay-1">
+      Real estate is the world's<br>
+      greatest <em>dead capital.</em><br>
+      CAVOK is the tool that<br>moves it.
     </h1>
-    <p class="hero-body">
-      Next-gen tokenization of real-world assets. CAVOK structures European real estate as profit-participating loans — providing fractional access, multiple potential income streams, and full on-chain transparency.
+    <div class="rule fade-up delay-2"></div>
+    <p class="hero-sub fade-up delay-3">
+      CAVOK Global is a technology platform that makes real estate programmable — structured, transparent and on-chain on Flare Network.
     </p>
-    <div class="hero-actions">
-      <a class="btn-gold" href="projects.html">Explore Projects</a>
-      <a class="btn-ghost" href="about.html">Our Approach</a>
+    <div class="hero-actions fade-up delay-4">
+      <a href="#what" class="btn-secondary">Learn more</a>
+      <a href="https://cavok-dapp.vercel.app" class="btn-primary">Open dApp →</a>
     </div>
   </div>
-
-  <div class="hero-scroll">
-    <div class="scroll-bar"></div>
-    <span class="scroll-label">Scroll</span>
-  </div>
-
-  <div class="hero-stats">
-    <div class="hstat">
-      <div class="hstat-v">€6.9M</div>
-      <div class="hstat-l">Pipeline TVL</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-v">3</div>
-      <div class="hstat-l">Income Streams</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-v">€1,000</div>
-      <div class="hstat-l">Min. Position</div>
-    </div>
-  </div>
+  <svg class="hero-corner" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="160" cy="160" r="158" stroke="#d4a86a" stroke-width="0.5"/>
+    <circle cx="160" cy="160" r="120" stroke="#d4a86a" stroke-width="0.5"/>
+    <circle cx="160" cy="160" r="80" stroke="#d4a86a" stroke-width="0.5"/>
+    <circle cx="160" cy="160" r="40" stroke="#d4a86a" stroke-width="0.5"/>
+    <circle cx="160" cy="160" r="8" fill="#d4a86a" opacity="0.3"/>
+  </svg>
 </section>
 
-<!-- WHAT WE DO -->
-<section class="what">
-  <div class="what-left reveal">
-    <div class="what-num">01 — What We Do</div>
-    <h2 class="what-title">Capital that works<br>before the first<br>brick is laid.</h2>
-    <p class="what-body">
-      Most real estate investments lock your capital away while construction progresses. CAVOK deploys committed capital into DeFi vaults during the build phase — so your position may generate returns before the property is completed.
-    </p>
-    <a class="what-link" href="technology.html">How it works</a>
-  </div>
-  <div class="what-right reveal">
-    <div class="what-item">
-      <div class="what-item-num">I</div>
-      <div>
-        <div class="what-item-title">Vault deployment — active from day one</div>
-        <div class="what-item-text">Idle capital is deployed into DeFi vaults from the day funds are committed. Variable vault yield — not guaranteed. Returns depend on DeFi market conditions and are distributed to token holders throughout the project lifecycle.</div>
+<!-- WHAT IS CAVOK -->
+<section id="what">
+  <div class="container">
+    <div class="two-col">
+      <div class="reveal">
+        <p class="eyebrow">01 — What is CAVOK</p>
+        <h2>Dead capital doesn't move<br>on its own.<br><em>It needs infrastructure.</em></h2>
+        <div class="rule"></div>
+        <p>Real estate is the world's largest asset class — but it has always been difficult to divide, move or transact quickly. CAVOK Global is the infrastructure layer that changes that.</p>
+        <br>
+        <p>The platform structures European real estate as digital tokens on Flare Network. Each token represents a legal share in an SPV — a dedicated entity that owns the property. Everything is transparent and verifiable on-chain.</p>
+        <br>
+        <p style="font-size:13px; color:var(--dim);">Not a fund. Not a wrapper. Not a promise. A new infrastructure layer for an asset class that has never had one.</p>
       </div>
-    </div>
-    <div class="what-item">
-      <div class="what-item-num">II</div>
-      <div>
-        <div class="what-item-title">Rental income — conditional interest</div>
-        <div class="what-item-text">Upon completion, rental income may flow on-chain as conditional interest on your loan position. Returns are variable and not guaranteed — depend on occupancy and market conditions. This is not financial advice.</div>
-      </div>
-    </div>
-    <div class="what-item">
-      <div class="what-item-num">III</div>
-      <div>
-        <div class="what-item-title">Exit — pro-rata distribution</div>
-        <div class="what-item-text">Your share of proceeds at property sale. Partial exits supported — redeem any number of tokens. Exit values depend on market conditions and are not guaranteed.</div>
+      <div class="reveal">
+        <div class="step-list">
+          <div class="step">
+            <div class="step-num">I</div>
+            <div>
+              <div class="step-title">Property</div>
+              <div class="step-body">A physical European property — verified and structured.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">II</div>
+            <div>
+              <div class="step-title">SPV</div>
+              <div class="step-body">A dedicated legal entity owns the property. Luxembourg structure.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">III</div>
+            <div>
+              <div class="step-title">Token</div>
+              <div class="step-body">SPV shares become digital tokens on Flare Network.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">IV</div>
+            <div>
+              <div class="step-title">On-chain</div>
+              <div class="step-body">Ownership, transactions and structure verifiable in real time.</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="how">
-  <div class="how-head reveal">
-    <h2 class="how-title">From wallet<br>to position in<br>four steps.</h2>
-    <p class="how-sub">
-      CAVOK handles the complexity of real estate investment on-chain. Connect, choose, commit — and track your position transparently.
-    </p>
+<section id="how">
+  <div class="container reveal">
+    <p class="eyebrow">02 — How it works</p>
+    <h2>From property to<br><em>on-chain position.</em></h2>
+    <div class="rule"></div>
+    <p style="max-width:600px;">CAVOK handles the complexity of structuring real estate on-chain. Each step is transparent, verifiable and enforced at the protocol level.</p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">Step 01</div>
+        <div class="flow-title">Property selected</div>
+        <div class="flow-desc">Due diligence completed. Asset structured into a dedicated SPV.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">Step 02</div>
+        <div class="flow-title">Value attested</div>
+        <div class="flow-desc">Property valuation confirmed on-chain via FDC Web2Json — no manual input.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">Step 03</div>
+        <div class="flow-title">Tokens issued</div>
+        <div class="flow-desc">SPV shares become tokens. 1 token = 1 verified legal fraction of the asset.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">Step 04</div>
+        <div class="flow-title">KYC verified</div>
+        <div class="flow-desc">Identity verified once via Sumsub. Compliance enforced on-chain.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">Step 05</div>
+        <div class="flow-title">Position live</div>
+        <div class="flow-desc">Ownership transparent and auditable in real time on Flare Network.</div>
+      </div>
+    </div>
   </div>
-  <div class="how-grid reveal">
-    <div class="how-step">
-      <div class="how-step-n">1</div>
-      <span class="how-step-icon">◎</span>
-      <div class="how-step-title">Connect your wallet</div>
-      <div class="how-step-text">Connect via Bifrost, MetaMask, or WalletConnect. Compliance is verified on-chain — no separate KYC for existing Flare users.</div>
-    </div>
-    <div class="how-step">
-      <div class="how-step-n">2</div>
-      <span class="how-step-icon">⬡</span>
-      <div class="how-step-title">Choose a project</div>
-      <div class="how-step-text">Browse live SPVs with real-time data from Flare Network. Each project shows build progress, vault status, and key project metrics.</div>
-    </div>
-    <div class="how-step">
-      <div class="how-step-n">3</div>
-      <span class="how-step-icon">◈</span>
-      <div class="how-step-title">Commit USDT0</div>
-      <div class="how-step-text">Approve and commit your position to the project escrow. Tokens are minted pro-rata when the hard cap is reached and activated.</div>
-    </div>
-    <div class="how-step">
-      <div class="how-step-n">4</div>
-      <span class="how-step-icon">⟳</span>
-      <div class="how-step-title">Track on-chain</div>
-      <div class="how-step-text">Vault positions begin immediately. Claim to wallet, compound via the secondary market, or enable auto-compound with a configurable threshold.</div>
+</section>
+
+<!-- TECHNOLOGY -->
+<section id="tech">
+  <div class="container">
+    <div class="two-col">
+      <div class="reveal">
+        <p class="eyebrow">03 — Technology</p>
+        <h2>Built on<br><em>Flare Network.</em></h2>
+        <div class="rule"></div>
+        <p>Real estate tokenization has three unsolved problems: how to verify value, how to settle stably, and how to prove ownership without trusting a middleman. Flare Network solves all three natively — which is why we built on it, and not anywhere else.</p>
+        <br>
+        <p style="font-size:13px; color:var(--dim);">Every component of the CAVOK stack was purpose-built for real estate on-chain. No shortcuts. No wrappers. No off-chain dependencies where they can be avoided.</p>
+      </div>
+      <div class="reveal">
+        <div class="tech-grid" style="margin-top:0;">
+          <div class="tech-card">
+            <div class="tech-name">Flare Network</div>
+            <div class="tech-role">EVM-compatible Layer 1. The foundation everything runs on.</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-name">FDC Web2Json</div>
+            <div class="tech-role">Confirms property valuations from external sources directly on-chain.</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-name">USDT0</div>
+            <div class="tech-role">Native stablecoin on Flare. Stable settlement without bridging risk.</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-name">Upshift Finance</div>
+            <div class="tech-role">Committed capital stays active in DeFi vaults between transactions.</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-name">Sumsub KYC</div>
+            <div class="tech-role">Identity verification integrated directly into the platform.</div>
+          </div>
+          <div class="tech-card">
+            <div class="tech-name">Monerium EMI</div>
+            <div class="tech-role">Regulated payment infrastructure. Connecting traditional banking to on-chain.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- TRACK RECORD -->
-<section class="track">
+<section id="track">
   <div class="track-inner">
-    <div class="track-left reveal">
-      <div class="track-num">03 — Track Record</div>
-      <h2 class="track-title">Proven track record</h2>
-      <p class="track-sub">Before building the platform, we built the proof.</p>
+    <div class="reveal">
+      <p class="eyebrow">04 — Track record</p>
+      <h2>Proven track record</h2>
+      <p style="margin-top:8px;">Before building the platform, we built the proof.</p>
       <div class="track-stat">
         <div class="track-stat-v">+53%</div>
         <div class="track-stat-l">ROI over 2 years<br>Marbella, Costa del Sol</div>
       </div>
-      <p class="track-body">
+      <p style="max-width:480px;">
         The Para&iacute;so development in Marbella delivered 53% return over a 2-year hold period &mdash; and taught us exactly what a tokenized real estate platform needed to get right.
       </p>
-      <a href="projects.html#completed" class="what-link" style="margin-top:24px">View completed projects</a>
       <p class="track-disc">Past performance does not guarantee future results.</p>
     </div>
     <div class="track-right reveal">
@@ -790,46 +653,88 @@ footer {
   </div>
 </section>
 
+<!-- STRUCTURE -->
+<section id="structure">
+  <div class="container">
+    <div class="two-col">
+      <div class="reveal">
+        <p class="eyebrow">05 — Structure</p>
+        <h2>Built for<br><em>compliance.</em></h2>
+        <div class="rule"></div>
+        <p>CAVOK tokens are profit-participating loan instruments — not transferable securities under MiFID II. The structure was designed with specialist legal counsel across Luxembourg SPV law, MiCA and MiFID frameworks.</p>
+        <br>
+        <p>Only KYC/AML-verified participants can hold tokens. Compliance is enforced at the protocol level, not just the interface.</p>
+      </div>
+      <div class="reveal">
+        <div class="compliance-list">
+          <div class="compliance-item">
+            <div class="ci-check">✦</div>
+            <div>
+              <div class="ci-title">Luxembourg SPV structure</div>
+              <div class="ci-body">Per-asset legal entity. Full ring-fencing. Direct audit trail.</div>
+            </div>
+          </div>
+          <div class="compliance-item">
+            <div class="ci-check">✦</div>
+            <div>
+              <div class="ci-title">MiCA / MiFID-aligned</div>
+              <div class="ci-body">Token architecture designed within existing EU regulatory framework.</div>
+            </div>
+          </div>
+          <div class="compliance-item">
+            <div class="ci-check">✦</div>
+            <div>
+              <div class="ci-title">Smart contract audit</div>
+              <div class="ci-body">Independent security review by preferred auditor via Flare BD.</div>
+            </div>
+          </div>
+          <div class="compliance-item">
+            <div class="ci-check">✦</div>
+            <div>
+              <div class="ci-title">KYC / AML on-chain</div>
+              <div class="ci-body">Full Sumsub identity verification. Only verified participants can hold tokens.</div>
+            </div>
+          </div>
+          <div class="compliance-item">
+            <div class="ci-check">✦</div>
+            <div>
+              <div class="ci-title">Monerium EMI</div>
+              <div class="ci-body">Regulated e-money institution handling fiat onboarding under EU licence.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
-  <div class="ft-brand">
-    <div class="ft-mark">
-      <div class="ft-sigil">◎</div>
-      <div class="ft-name">Cavok</div>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <svg width="28" height="28" viewBox="0 0 34 34" fill="none">
+          <circle cx="17" cy="17" r="16" stroke="#d4a86a" stroke-width="1.2"/>
+          <circle cx="17" cy="17" r="8.5" stroke="#d4a86a" stroke-width="1"/>
+          <circle cx="17" cy="17" r="2.5" fill="#d4a86a"/>
+        </svg>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:4px;color:#f5efe3;font-weight:300;text-transform:uppercase;">CAVOK Global</div>
+          <div style="font-size:8px;letter-spacing:2px;color:#d4a86a;opacity:0.5;text-transform:uppercase;">Flare Network · Mainnet Q3 2026</div>
+        </div>
+      </div>
+      <div class="footer-copy">© 2026 CAVOK Global · hello@cavokestates.com · @CavokGlobal</div>
     </div>
-    <p class="ft-tagline">Next-gen tokenization of real-world assets on Flare Network. Full on-chain transparency.</p>
-    <div class="ft-network">Flare Network · Coston2 Testnet · Mainnet Q3 2026</div>
-  </div>
-
-  <div class="ft-col">
-    <h4>Platform</h4>
-    <a href="projects.html">Projects</a>
-    <a href="technology.html">Technology</a>
-    <a href="about.html">Roadmap</a>
-  </div>
-
-  <div class="ft-col">
-    <h4>Company</h4>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="contact.html">Investors</a>
-  </div>
-
-  <div class="ft-col">
-    <h4>Network</h4>
-    <a href="https://flare.network" target="_blank">Flare Network</a>
-    <a href="https://coston2-explorer.flare.network" target="_blank">Block Explorer</a>
-    <a href="https://bifrostwallet.com" target="_blank">Bifrost Wallet</a>
-  </div>
-
-  <div class="ft-bottom">
-    <p class="ft-legal">CAVOK tokens are profit-participating loan instruments and are not classified as transferable securities under MiFID II. This website is for informational purposes only and does not constitute an offer, solicitation, or recommendation. Past performance is not indicative of future results. Returns are variable and not guaranteed. Consult legal and financial counsel before participating.</p>
-    <span class="ft-copy">© 2026 CAVOK</span>
+    <div>
+      <div class="footer-disclaimer">
+        CAVOK tokens are profit-participating loan instruments and are not classified as transferable securities under MiFID II. This website is for informational purposes only and does not constitute an offer, solicitation, or investment advice. Past performance is not indicative of future results. Returns are variable and not guaranteed. Consult legal and financial counsel before participating. Not available to US persons.
+      </div>
+    </div>
   </div>
 </footer>
 
 <script>
-// Cursor
+// Custom cursor
 const cur = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 let mx = 0, my = 0, rx = 0, ry = 0;
@@ -844,16 +749,18 @@ function animCursor() {
 animCursor();
 document.querySelectorAll('a, button').forEach(el => {
   el.addEventListener('mouseenter', () => {
-    cur.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%) scale(2.5)`;
-    ring.style.opacity = '0.3';
+    ring.style.width = '48px';
+    ring.style.height = '48px';
+    ring.style.opacity = '0.6';
   });
   el.addEventListener('mouseleave', () => {
-    cur.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%) scale(1)`;
+    ring.style.width = '32px';
+    ring.style.height = '32px';
     ring.style.opacity = '1';
   });
 });
 
-// Nav compact
+// Nav compact on scroll
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('compact', window.scrollY > 60);
 });
@@ -863,53 +770,6 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-</script>
-<style>
-.modal-overlay{display:none;position:fixed;inset:0;z-index:10000;align-items:center;justify-content:center;background:rgba(10,13,18,.82);backdrop-filter:blur(12px);padding:24px}
-.modal-box{background:var(--ink2,#111620);border:1px solid rgba(184,149,90,.18);border-radius:2px;width:100%;max-width:440px;padding:40px 36px;position:relative}
-.modal-close{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--cream3,rgba(240,232,216,.58));font-size:20px;cursor:pointer;padding:4px 8px;line-height:1}
-.modal-close:hover{color:var(--cream,#f2ebe0)}
-.modal-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--cream,#f2ebe0);margin-bottom:6px}
-.modal-sub{font-size:12px;font-weight:300;color:var(--cream3,rgba(240,232,216,.58));margin-bottom:28px}
-.modal-field{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
-.modal-field label{font-size:9px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:var(--cream3,rgba(240,232,216,.58))}
-.modal-field input,.modal-field textarea{background:var(--ink,#0a0d12);border:1px solid rgba(184,149,90,.12);color:var(--cream,#f2ebe0);padding:11px 14px;font-family:'Jost',sans-serif;font-size:13px;font-weight:300;outline:none;transition:border-color .2s;border-radius:1px}
-.modal-field input:focus,.modal-field textarea:focus{border-color:rgba(184,149,90,.4)}
-.modal-field textarea{min-height:80px;resize:vertical}
-.modal-submit{width:100%;padding:14px;background:var(--gold,#b8955a);color:var(--ink,#0a0d12);border:none;font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-top:6px;border-radius:1px}
-.modal-submit:hover{background:var(--gold2,#d4b07a)}
-.modal-confirm{text-align:center;padding:20px 0}
-.modal-confirm .check{font-size:32px;color:var(--gold,#b8955a);margin-bottom:12px}
-.modal-confirm p{font-size:13px;font-weight:300;color:var(--cream3,rgba(240,232,216,.58));line-height:1.7}
-.modal-confirm a{color:var(--gold,#b8955a);text-decoration:none}
-</style>
-<div id="access-modal" class="modal-overlay" onclick="if(event.target===this)this.style.display='none'">
-  <div class="modal-box">
-    <button class="modal-close" onclick="document.getElementById('access-modal').style.display='none'">&times;</button>
-    <div id="modal-form-wrap">
-      <div class="modal-title">Request Access</div>
-      <div class="modal-sub">We will be in touch shortly.</div>
-      <form id="access-form" onsubmit="return handleAccessForm(event)">
-        <div class="modal-field"><label>Full name</label><input type="text" name="name" required></div>
-        <div class="modal-field"><label>Email</label><input type="email" name="email" required></div>
-        <div class="modal-field"><label>Message <span style="opacity:.5">(optional)</span></label><textarea name="message" placeholder="Tell us about yourself or your interest in CAVOK"></textarea></div>
-        <button type="submit" class="modal-submit">Send Request</button>
-      </form>
-    </div>
-    <div id="modal-confirm" class="modal-confirm" style="display:none">
-      <div class="check">&#10003;</div>
-      <div class="modal-title" style="margin-bottom:12px">Thank you</div>
-      <p>We will be in touch at <a href="mailto:hello@cavokestates.com">hello@cavokestates.com</a></p>
-    </div>
-  </div>
-</div>
-<script>
-function handleAccessForm(e){
-  e.preventDefault();
-  document.getElementById('modal-form-wrap').style.display='none';
-  document.getElementById('modal-confirm').style.display='block';
-  return false;
-}
 </script>
 </body>
 </html>
