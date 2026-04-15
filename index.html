@@ -85,24 +85,7 @@
     backdrop-filter: blur(12px);
   }
 
-  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: none; }
-
-  .logo-mark {
-    width: 34px; height: 34px; position: relative; flex-shrink: 0;
-  }
-  .logo-mark svg { width: 100%; height: 100%; }
-
-  .nav-brand { display: flex; flex-direction: column; gap: 1px; }
-  .nav-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px; letter-spacing: 5px; color: var(--cream);
-    font-weight: 300; text-transform: uppercase; line-height: 1;
-  }
-  .nav-sub {
-    font-family: 'Jost', sans-serif;
-    font-size: 8px; letter-spacing: 2.5px; color: var(--gold);
-    text-transform: uppercase; opacity: 0.6;
-  }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; cursor: none; }
 
   .nav-links { display: flex; align-items: center; gap: 36px; }
   .nav-links a {
@@ -426,17 +409,7 @@
 <!-- NAV -->
 <nav id="nav">
   <a class="nav-logo" href="#">
-    <div class="logo-mark">
-      <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="17" cy="17" r="16" stroke="#d4a86a" stroke-width="1.2"/>
-        <circle cx="17" cy="17" r="8.5" stroke="#d4a86a" stroke-width="1"/>
-        <circle cx="17" cy="17" r="2.5" fill="#d4a86a"/>
-      </svg>
-    </div>
-    <div class="nav-brand">
-      <span class="nav-name">CAVOK Global</span>
-      <span class="nav-sub">Next-gen tokenization · Flare Network</span>
-    </div>
+    <img src="/cavok-logo.png" alt="CAVOK" height="30" style="display:block;">
   </a>
   <div class="nav-links">
     <a href="#what">What is CAVOK</a>
